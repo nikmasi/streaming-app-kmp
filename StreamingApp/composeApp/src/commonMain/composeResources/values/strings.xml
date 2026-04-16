@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="get_started_desc">Watch anywhere. Cancel anytime.</string>
+    <string name="get_started">Unlimited movies, TV shows, and more.</string>
+    <string name="get_started_btn">GET STARTED</string>
+    <string name="get_started_sign_in_btn">SIGN IN</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email_phone_input">Email or phone number</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_us">Join us and start streaming today.</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email Address</string>
+    <string name="phone">Phone</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="email_reset_password">Enter your email and we'll send you instructions to reset your password.</string>
+    <string name="send_email">Send Email</string>
+    <string name="back_to_sign_in">Back to Sign In</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="get_started_desc">Gledaj svuda. Otkaži bilokada.</string>
+    <string name="get_started">Neograničeni filmovi, serije i mnogo toga.</string>
+    <string name="get_started_btn">REGISTRUJ SE</string>
+    <string name="get_started_sign_in_btn">PRIJAVI SE</string>
+    <string name="sign_in">Prijavi se</string>
+    <string name="email_phone_input">Imejl ili broj telefona</string>
+    <string name="password">Lozinka</string>
+    <string name="forgot_password">Zaboravili ste lozinku?</string>
+    <string name="create_account">Kreiraj nalog</string>
+    <string name="join_us">Pridruži nam se i počni sa strimovanjem sadržaja.</string>
+    <string name="full_name">Ime i prezime</string>
+    <string name="email">Imejl adresa</string>
+    <string name="phone">Broj telefona</string>
+    <string name="confirm_password">Potvrdi lozinku</string>
+    <string name="sign_up">Registruj se</string>
+    <string name="have_account">Već imaš nalog?</string>
+    <string name="email_reset_password">Unesi imejl i poslaćemo ti instrukcije za resetovanje lozinke.</string>
+    <string name="send_email">Posalji mejl</string>
+    <string name="back_to_sign_in">Povratak na prijavu</string>
+</resources>
