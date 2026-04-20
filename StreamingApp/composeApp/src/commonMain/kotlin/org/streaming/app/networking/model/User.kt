@@ -51,3 +51,21 @@ data class ProfileImageRequest(
     val email: String,
     val profileImage: String?
 )
+
+@Serializable
+data class SearchRequest(
+    val email: String
+)
+
+@Serializable
+data class MyListRequest(
+    val email: String,
+    val type: ListType
+)
+
+@Serializable
+data class AddMyListRequest(
+    val movieId: Long,
+    val email: String,
+    val type: ListType
+)

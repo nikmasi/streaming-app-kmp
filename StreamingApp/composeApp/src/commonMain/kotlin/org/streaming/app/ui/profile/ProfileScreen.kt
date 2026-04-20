@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
+import org.streaming.app.CommonVerticalScrollbar
 import org.streaming.app.ui.auth.AuthViewModel
 import streamingapp.composeapp.generated.resources.Res
 import streamingapp.composeapp.generated.resources.blue_face
@@ -50,6 +51,8 @@ fun ProfileScreen(authViewModel: AuthViewModel,onLogout: () -> Unit) {
     val userProfile = authViewModel.userProfile
 
     var showIconPicker by remember { mutableStateOf(false) }
+
+    val scrollState = rememberScrollState()
 
     if (showPasswordDialog) {
         ChangePasswordDialog(
@@ -80,11 +83,11 @@ fun ProfileScreen(authViewModel: AuthViewModel,onLogout: () -> Unit) {
         },
         containerColor = Color.Black
     ) { padding ->
+        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -174,6 +177,14 @@ fun ProfileScreen(authViewModel: AuthViewModel,onLogout: () -> Unit) {
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(74.dp))
+        }
+            CommonVerticalScrollbar(
+                state = scrollState,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxHeight()
+                    .padding(vertical = 4.dp, horizontal = 2.dp)
+            )
         }
     }
 }

@@ -20,10 +20,15 @@ import io.ktor.http.headers
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.streaming.app.networking.model.AddMyListRequest
 import org.streaming.app.networking.model.AuthResponse
+import org.streaming.app.networking.model.ListType
 import org.streaming.app.networking.model.Movie
 import org.streaming.app.networking.model.LoginRequest
+import org.streaming.app.networking.model.MyListRequest
 import org.streaming.app.networking.model.ProfileImageRequest
+import org.streaming.app.networking.model.Search
+import org.streaming.app.networking.model.SearchRequest
 import org.streaming.app.networking.model.SignUpRequest
 import org.streaming.app.networking.model.TokenPair
 import org.streaming.app.networking.model.User
@@ -109,10 +114,22 @@ class KtorClient{
     }
 
     //movie
-    suspend fun searchMovies(title: String): List<Movie> {
+    suspend fun searchMovies(title: String, email: String): List<Movie> {
         return getClient().get("movies/search") {
             parameter("title", title)
+            parameter("email", email)
         }.body()
+    }
+
+    suspend fun searchHistoryTop10(email: String): List<Search>{
+        val response = getClient().post{
+            url{
+                path("/user/search-history-top")
+            }
+            contentType(ContentType.Application.Json)
+            setBody(SearchRequest(email))
+        }.body<List<Search>>()
+        return response
     }
 
     suspend fun releaseYearTop5Movies(): List<Movie>{
@@ -123,5 +140,28 @@ class KtorClient{
         return getClient().get("movies/top5ByGenreOrderByYear"){
             parameter("genre", genre)
         }.body()
+    }
+
+
+    suspend fun myListMovie(email: String, type: ListType): List<Movie>{
+        val response = getClient().post{
+            url{
+                path("/movies/my-list")
+            }
+            contentType(ContentType.Application.Json)
+            setBody(MyListRequest(email = email, type = type))
+        }.body<List<Movie>>()
+        return response
+    }
+
+    suspend fun addMyList(email: String, movieId:Long, type: ListType): List<Movie>{
+        val response = getClient().post{
+            url{
+                path("/movies/add-my-list")
+            }
+            contentType(ContentType.Application.Json)
+            setBody(AddMyListRequest(email = email, movieId = movieId, type = type))
+        }.body<List<Movie>>()
+        return response
     }
 }

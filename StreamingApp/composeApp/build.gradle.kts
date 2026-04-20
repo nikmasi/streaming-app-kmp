@@ -23,13 +23,13 @@ kotlin {
     js {
         browser()
         binaries.executable()
-    }
-    
+    }*/
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         binaries.executable()
-    }*/
+    }
     
     sourceSets {
         androidMain.dependencies {
@@ -49,6 +49,10 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
 
+            //ksafe
+            //implementation(libs.ksafe)
+            //implementation(libs.ksafe.compose)
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -60,7 +64,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
-
 
             // koin
             implementation("io.insert-koin:koin-compose:4.0.0")
@@ -97,6 +100,11 @@ kotlin {
             implementation(libs.ksafe)
             implementation(libs.ksafe.compose)
 
+            //material3 windows size class
+            implementation("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
+
+            implementation(compose.foundation)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -106,10 +114,11 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
 
-        jsMain.dependencies {
+        wasmJsMain.dependencies {
             implementation(libs.navigation3.browser)
 
             implementation(libs.ktor.client.js)
+
         }
     }
 }

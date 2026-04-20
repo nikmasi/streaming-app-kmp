@@ -1,26 +1,45 @@
 package com.streaming.spring_boot.movie.controller
 
+import com.streaming.spring_boot.movie.model.ListType
 import com.streaming.spring_boot.movie.model.Movie
 import com.streaming.spring_boot.movie.service.MovieService
+import com.streaming.spring_boot.security.UserService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
 @RequestMapping("/movies")
 class MovieController(
-    private val movieService: MovieService
+    private val movieService: MovieService,
+    private val userService: UserService
 ) {
     data class MoviesTitleRequest(
         val title: String,
+        val email: String
+    )
+
+    data class MyListRequest(
+        val email: String,
+        val type: ListType
+    )
+
+    data class AddMyListRequest(
+        val movieId: Long,
+        val email: String,
+        val type: ListType
     )
 
     @GetMapping("/search")
     fun search(
-        @RequestParam title: String
+        @RequestParam title: String,
+        @RequestParam email: String
     ): List<Movie>? {
+        userService.saveSearchContent(title,email)
         return movieService.search(title)
     }
 
@@ -32,5 +51,24 @@ class MovieController(
     @GetMapping("/top5ByGenreOrderByYear")
     fun top5ByGenreOrderByYear(@RequestParam genre: String): List<Movie>? {
         return movieService.top5ByGenreOrderByYear(genre)
+    }
+
+    @PostMapping("/my-list")
+    fun myList(
+        @Valid @RequestBody body: MyListRequest
+    ): List<Movie>{
+        return movieService.getMyListMovies(body.email, body.type)
+    }
+
+    @PostMapping("/add-my-list")
+    fun addMyList(
+        @Valid @RequestBody body: AddMyListRequest
+    ): Boolean{
+        return movieService.addToMyListMovies(body.email, body.movieId, body.type)
+    }
+
+    @PostMapping("/remove-my-list")
+    fun removeFromMyList(@RequestBody request: AddMyListRequest): Boolean {
+        return movieService.removeFromMyList(request.email, request.movieId, request.type)
     }
 }

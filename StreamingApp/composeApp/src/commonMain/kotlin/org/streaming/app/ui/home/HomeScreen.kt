@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -19,14 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import org.jetbrains.compose.resources.painterResource
+import org.streaming.app.CommonVerticalScrollbar
 import org.streaming.app.networking.model.Movie
-import streamingapp.composeapp.generated.resources.Res
-import streamingapp.composeapp.generated.resources.get_started
 
 @Composable
 fun HomeScreen(
-    onMovieClick: (String, String, String, Int, Int, String, String) -> Unit,
+    onMovieClick: (Long, String, String, String, Int, Int, String, String) -> Unit,
     homeViewModel: HomeViewModel
 ) {
     LaunchedEffect(Unit) {
@@ -36,77 +37,106 @@ fun HomeScreen(
 
     val top5 = homeViewModel.top5
     val genreTop5 = homeViewModel.top5Drama
+
+    val lazyListState = rememberLazyListState()
+
     Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            item { FeaturedSection() }
-
-            item { MovieCategory("Newest Releases", onMovieClick, false,top5) }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            state = lazyListState
+        ) {
+            item { FeaturedSection(homeViewModel.top5) }
+            item { MovieCategory("Newest Releases", onMovieClick, false, top5) }
             item { MovieCategory("Newest Releases Drama", onMovieClick, false, genreTop5) }
-
             item { Spacer(modifier = Modifier.height(180.dp)) }
-
         }
+
+        CommonVerticalScrollbar(
+            state = lazyListState,
+            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
+        )
+
         TopNavigation()
     }
 }
-
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FeaturedSection() {
-    Box(modifier = Modifier.fillMaxWidth().height(500.dp)) {
-        Image(
-            painter = painterResource(Res.drawable.get_started),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
+fun FeaturedSection(movies: List<Movie>) {
 
+    if (movies.isEmpty()) {
         Box(
-            modifier = Modifier.fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f), Color.Black),
-                        startY = 200f
-                    )
-                )
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(380.dp)
+                .background(Color.Black)
         )
+        return
+    }
 
-        Column(
-            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Sci-Fi", color = Color.White, fontSize = 12.sp)
-                Text(" • ", color = Color.Red)
-                Text("Action", color = Color.White, fontSize = 12.sp)
-                Text(" • ", color = Color.Red)
-                Text("Drama", color = Color.White, fontSize = 12.sp)
-            }
-            Spacer(modifier = Modifier.height(16.dp))
+    val pagerState = rememberPagerState(pageCount = { movies.size })
 
-            Row {
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(4.dp)
-                ) {
-                    Text("Play", color = Color.Black, fontWeight = FontWeight.Bold)
-                }
-                Spacer(modifier = Modifier.width(10.dp))
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray.copy(alpha = 0.6f)),
-                    shape = RoundedCornerShape(4.dp)
-                ) {
-                    Text("My List", color = Color.White)
-                }
+    // auto-scroll (stabilan, bez memory leak-a)
+    LaunchedEffect(movies.size) {
+        if (movies.size > 1) {
+            while (true) {
+                kotlinx.coroutines.delay(4000)
+
+                val nextPage =
+                    if (pagerState.currentPage + 1 < movies.size)
+                        pagerState.currentPage + 1
+                    else 0
+
+                pagerState.animateScrollToPage(nextPage)
             }
         }
     }
-}
 
+    Box(modifier = Modifier.fillMaxWidth().height(380.dp)) {
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+
+            val movie = movies[page]
+
+            AsyncImage(
+                model = movie.thumbnailUrl,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black.copy(alpha = 0.4f),
+                                Color.Black
+                            )
+                        )
+                    )
+            )
+
+            // title overlay
+            Text(
+                text = movie.title,
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.BottomStart).padding(16.dp)
+            )
+        }
+    }
+}
 @Composable
-fun MovieCategory(title: String, onMovieClick: (String, String, String, Int, Int, String, String) -> Unit
-                  , isLarge: Boolean = false, movies: List<Movie>) {
+fun MovieCategory(
+    title: String,
+    onMovieClick: (Long, String, String, String, Int, Int, String, String) -> Unit,
+    isLarge: Boolean = false, movies: List<Movie>
+) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Text(
             text = title,
@@ -127,7 +157,7 @@ fun MovieCategory(title: String, onMovieClick: (String, String, String, Int, Int
                         .height(if (isLarge) 220.dp else 160.dp)
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color.DarkGray)
-                        .clickable { onMovieClick(
+                        .clickable { onMovieClick(movie.id,
                             movie.title, movie.description, movie.genre,
                             movie.duration, movie.releaseYear, movie.thumbnailUrl, movie.videoUrl
                         ) }

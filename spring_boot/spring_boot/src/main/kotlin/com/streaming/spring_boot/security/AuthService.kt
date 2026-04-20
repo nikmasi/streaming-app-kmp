@@ -1,9 +1,9 @@
 package com.streaming.spring_boot.security
 
-import com.streaming.spring_boot.database.model.RefreshToken
-import com.streaming.spring_boot.database.model.User
-import com.streaming.spring_boot.database.repository.RefreshTokenRepository
-import com.streaming.spring_boot.database.repository.UserRepository
+import com.streaming.spring_boot.user.model.RefreshToken
+import com.streaming.spring_boot.user.model.User
+import com.streaming.spring_boot.user.repository.RefreshTokenRepository
+import com.streaming.spring_boot.user.repository.UserRepository
 import jakarta.transaction.Transactional
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode

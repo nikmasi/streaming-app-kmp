@@ -1,6 +1,6 @@
-package com.streaming.spring_boot.database.repository
+package com.streaming.spring_boot.user.repository
 
-import com.streaming.spring_boot.database.model.RefreshToken
+import com.streaming.spring_boot.user.model.RefreshToken
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface RefreshTokenRepository: JpaRepository<RefreshToken, Long> {

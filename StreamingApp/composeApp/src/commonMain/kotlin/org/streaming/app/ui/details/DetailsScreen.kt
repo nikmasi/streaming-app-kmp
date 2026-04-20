@@ -32,7 +32,8 @@ fun DetailsScreen(
     url: String,
     videoUrl: String,
     onPlayClick: () -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onClickMyList: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().background(Color.Black).verticalScroll(rememberScrollState())
@@ -112,10 +113,11 @@ fun DetailsScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 DetailsActionButton(
                     icon = Icons.Default.Add,
                     label = "My List",
-                    onClick = { /* tvoja logika */ }
+                    onClick = { onClickMyList() }
                 )
 
                 DetailsActionButton(

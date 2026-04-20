@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.streaming.app.networking.model.Movie
 import org.streaming.app.networking.KtorClient
+import org.streaming.app.networking.model.Search
 
 class MovieViewModel(
     private val ktorClient: KtorClient,
@@ -15,10 +16,13 @@ class MovieViewModel(
     var movies by mutableStateOf<List<Movie>>(emptyList())
         private set
 
+    var searchHistory by mutableStateOf<List<Search>>(emptyList())
+        private set
+
     var isLoading by mutableStateOf(false)
         private set
 
-    fun search(title: String) {
+    fun search(title: String, email: String) {
         if (title.isBlank()) {
             movies = emptyList()
             return
@@ -27,11 +31,23 @@ class MovieViewModel(
         viewModelScope.launch {
             isLoading = true
             try {
-                movies = ktorClient.searchMovies(title)
+                movies = ktorClient.searchMovies(title, email)
             } catch (e: Exception) {
                 println("Greška pri pretrazi: ${e.message}")
             } finally {
                 isLoading = false
+            }
+        }
+    }
+
+    fun searchHistory(email: String){
+        viewModelScope.launch {
+            try {
+                searchHistory =ktorClient.searchHistoryTop10(email)
+                println("search history "+ searchHistory)
+            }
+            catch (e: Exception){
+                println("Greska")
             }
         }
     }

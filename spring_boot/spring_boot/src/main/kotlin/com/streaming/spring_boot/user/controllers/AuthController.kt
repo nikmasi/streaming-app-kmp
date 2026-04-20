@@ -1,4 +1,4 @@
-package com.streaming.spring_boot.controllers
+package com.streaming.spring_boot.user.controllers
 
 import com.streaming.spring_boot.security.AuthService
 import jakarta.validation.Valid

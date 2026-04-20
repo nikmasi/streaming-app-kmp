@@ -17,6 +17,7 @@ sealed interface Route : NavKey {
     @Serializable data object Downloads : Route
     @Serializable data object Profile : Route
     @Serializable data class Details(
+        val id: Long,
         val title: String, val desc: String, val genre: String,
         val duration:Int, val year: Int, val url: String, val videoUrl: String
     ) : Route

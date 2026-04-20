@@ -1,4 +1,4 @@
-package com.streaming.spring_boot.database.model
+package com.streaming.spring_boot.user.model
 
 import jakarta.persistence.*
 import java.time.Instant
