@@ -1,6 +1,7 @@
 package com.streaming.spring_boot.security
 
 import com.streaming.spring_boot.user.model.RefreshToken
+import com.streaming.spring_boot.user.model.Role
 import com.streaming.spring_boot.user.model.User
 import com.streaming.spring_boot.user.repository.RefreshTokenRepository
 import com.streaming.spring_boot.user.repository.UserRepository
@@ -46,9 +47,12 @@ class AuthService(
         userRepository.save(
             User(
                 email = email,
-                hashedPassword = hashEncoder.encode(raw=password),
+                hashedPassword = hashEncoder.encode(raw = password),
                 fullName = fullName,
-                phone = phone
+                phone = phone,
+                id = 1,
+                role = Role.USER,
+                profileImage = ""
             )
         )
         return this.login(email,password)

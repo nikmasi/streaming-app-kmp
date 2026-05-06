@@ -19,8 +19,11 @@ data class User(
     var hashedPassword: String,
     val createdAt: Instant = Instant.now(),
 
-    @Column(nullable = false, name = "\"fullname\"")
-    val fullName: String,
+    @Column(nullable = false, name = "\"firstname\"")
+    val firstname: String,
+
+    @Column(nullable = false, name = "\"lastname\"")
+    val lastname: String,
 
     @Column(nullable = false, name = "\"phone\"")
     val phone: String,
@@ -34,7 +37,7 @@ data class User(
 ): UserDetails{
     override fun getAuthorities(): Collection<GrantedAuthority> = role.authorities
 
-    override fun getPassword(): String = password
+    override fun getPassword(): String = hashedPassword
 
     override fun getUsername(): String = email
 
@@ -45,5 +48,4 @@ data class User(
     override fun isCredentialsNonExpired(): Boolean = true
 
     override fun isEnabled(): Boolean = true
-
 }

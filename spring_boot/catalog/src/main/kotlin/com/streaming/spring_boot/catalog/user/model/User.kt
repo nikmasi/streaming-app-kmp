@@ -1,9 +1,7 @@
-package com.streaming.spring_boot.user.model
+package com.streaming.spring_boot.catalog.user.model
 
 import jakarta.persistence.*
 import java.time.Instant
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "users") //reserved User
@@ -31,19 +29,4 @@ data class User(
     @Column(nullable = false, name = "\"profileImage\"")
     var profileImage: String? = null
 
-): UserDetails{
-    override fun getAuthorities(): Collection<GrantedAuthority> = role.authorities
-
-    override fun getPassword(): String = password
-
-    override fun getUsername(): String = email
-
-    override fun isAccountNonExpired(): Boolean = true
-
-    override fun isAccountNonLocked(): Boolean = true
-
-    override fun isCredentialsNonExpired(): Boolean = true
-
-    override fun isEnabled(): Boolean = true
-
-}
+)
