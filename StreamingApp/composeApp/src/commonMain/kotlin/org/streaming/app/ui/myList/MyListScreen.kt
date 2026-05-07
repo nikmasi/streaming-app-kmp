@@ -23,7 +23,7 @@ import org.streaming.app.ui.search.MovieItem
 
 @Composable
 fun MyListScreen(
-    onMovieClick: (Long, String, String, String, Int, Int, String, String) -> Unit,
+    onMovieClick: (Long, String, String, List<String>, Int, Int, String, String) -> Unit,
     myListViewModel: MyListViewModel,
     email: String
 ) {
@@ -54,10 +54,10 @@ fun MyListScreen(
                     val movie = myList[index]
                     MovieItem(movie = movie, onClick = {
                         onMovieClick(
-                            movie.id,
+                            movie.id.timestamp,
                             movie.title,
                             movie.description,
-                            movie.genre,
+                            movie.genres,
                             movie.duration,
                             movie.releaseYear,
                             movie.thumbnailUrl,

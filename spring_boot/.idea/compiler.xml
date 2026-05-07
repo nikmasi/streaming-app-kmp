@@ -14,6 +14,9 @@
       <module name="discovery" options="-parameters" />
       <module name="discovery.main" options="-parameters" />
       <module name="discovery.test" options="-parameters" />
+      <module name="favourites" options="-parameters" />
+      <module name="favourites.main" options="-parameters" />
+      <module name="favourites.test" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="gateway.main" options="-parameters" />
       <module name="gateway.test" options="-parameters" />

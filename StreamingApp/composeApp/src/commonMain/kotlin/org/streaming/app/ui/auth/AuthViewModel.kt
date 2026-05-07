@@ -57,21 +57,43 @@ class AuthViewModel(
     var registerState by mutableStateOf<UserInformation?>(null)
         private set
 
+//    fun login(email: String, password: String) {
+//        viewModelScope.launch {
+//            try {
+//                val authResponse = ktorClient.login(email, password)
+//                loginState = LoginResult.Success(authResponse.tokens)
+//
+//                updateToken(
+//                    access = authResponse.tokens.accessToken,
+//                    refresh = authResponse.tokens.refreshToken
+//                )
+//
+//                updateProfile(authResponse.userInformation.email,
+//                    "",authResponse.userInformation.fullName,
+//                    authResponse.userInformation.phone
+//                )
+//
+//            } catch (e: Exception) {
+//                loginState = LoginResult.Error(e.message ?: "Nepoznata greška")
+//            }
+//        }
+//    }
+
     fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
                 val authResponse = ktorClient.login(email, password)
-                loginState = LoginResult.Success(authResponse.tokens)
+                loginState = LoginResult.Success(TokenPair(authResponse.access_token,authResponse.refresh_token))
 
                 updateToken(
-                    access = authResponse.tokens.accessToken,
-                    refresh = authResponse.tokens.refreshToken
+                    access = authResponse.access_token,
+                    refresh = authResponse.refresh_token
                 )
 
-                updateProfile(authResponse.userInformation.email,
-                    "",authResponse.userInformation.fullName,
-                    authResponse.userInformation.phone
-                )
+//                updateProfile(authResponse.userInformation.email,
+//                    "",authResponse.userInformation.fullName,
+//                    authResponse.userInformation.phone
+//                )
 
             } catch (e: Exception) {
                 loginState = LoginResult.Error(e.message ?: "Nepoznata greška")
@@ -92,21 +114,42 @@ class AuthViewModel(
         }
     }
 
+//    fun register(email: String, password: String, fullName: String, phone: String) {
+//        viewModelScope.launch {
+//            try {
+//                val authResponse = ktorClient.register(email, password, fullName, phone)
+//                registerState = authResponse.userInformation
+//
+//                updateToken(
+//                    access = authResponse.tokens.accessToken,
+//                    refresh = authResponse.tokens.refreshToken
+//                )
+//
+//                updateProfile(authResponse.userInformation.email,
+//                    "",authResponse.userInformation.fullName,
+//                    authResponse.userInformation.phone
+//                )
+//            } catch (e: Exception) {
+//                registerState = null
+//            }
+//        }
+//    }
+
     fun register(email: String, password: String, fullName: String, phone: String) {
         viewModelScope.launch {
             try {
                 val authResponse = ktorClient.register(email, password, fullName, phone)
-                registerState = authResponse.userInformation
+               // registerState = authResponse.userInformation
 
                 updateToken(
-                    access = authResponse.tokens.accessToken,
-                    refresh = authResponse.tokens.refreshToken
+                    access = authResponse.access_token,
+                    refresh = authResponse.refresh_token
                 )
 
-                updateProfile(authResponse.userInformation.email,
-                    "",authResponse.userInformation.fullName,
-                    authResponse.userInformation.phone
-                )
+//                updateProfile(authResponse.userInformation.email,
+//                    "",authResponse.userInformation.fullName,
+//                    authResponse.userInformation.phone
+//                )
             } catch (e: Exception) {
                 registerState = null
             }

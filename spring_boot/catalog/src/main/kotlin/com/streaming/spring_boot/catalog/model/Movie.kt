@@ -1,27 +1,17 @@
 package com.streaming.spring_boot.catalog.model
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
+import org.bson.types.ObjectId
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document("movies")
 data class Movie(
-    @Id
-    @GeneratedValue
-    val id: Long = 0,
-
-    val title: String ="",
-    val description: String ="",
-
-    val genre: String="",
-    val duration: Int=0, // u min
-
-    @Column(name = "\"releaseyear\"", nullable = false)
-    val releaseYear: Int = 0,
-
-    @Column(name = "\"thumbnailurl\"", nullable = false)
-    val thumbnailUrl: String ="",
-    @Column(name = "\"videourl\"", nullable = false)
-    val videoUrl: String=""
+    @Id val id: ObjectId? = null,
+    val title: String,
+    val description: String,
+    val genres: List<String>,
+    val duration: Int,
+    val releaseYear: Int,
+    val thumbnailUrl: String,
+    val videoUrl: String,
 )

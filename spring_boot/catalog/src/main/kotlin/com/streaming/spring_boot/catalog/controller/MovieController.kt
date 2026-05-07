@@ -1,8 +1,9 @@
 package com.streaming.spring_boot.catalog.controller
 
-import com.streaming.spring_boot.catalog.model.ListType
+//import com.streaming.spring_boot.catalog.model.ListType
 import com.streaming.spring_boot.catalog.model.Movie
 import com.streaming.spring_boot.catalog.service.MovieService
+import org.bson.types.ObjectId
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,16 +23,16 @@ class MovieController(
         val email: String
     )
 
-    data class MyListRequest(
-        val email: String,
-        val type: ListType
-    )
-
-    data class AddMyListRequest(
-        val movieId: Long,
-        val email: String,
-        val type: ListType
-    )
+//    data class MyListRequest(
+//        val email: String,
+//        val type: ListType
+//    )
+//
+//    data class AddMyListRequest(
+//        val movieId: ObjectId,
+//        val email: String,
+//        val type: ListType
+//    )
 
     @GetMapping("/search")
     fun search(
@@ -44,7 +45,10 @@ class MovieController(
 
     @GetMapping("/yearTop5")
     fun yearTop5(): List<Movie>? {
-        return movieService.yearTop5()
+        println("ovde")
+        val movies =movieService.yearTop5()
+        println(movies.toString())
+        return movies
     }
 
     @GetMapping("/top5ByGenreOrderByYear")
@@ -52,24 +56,37 @@ class MovieController(
         return movieService.top5ByGenreOrderByYear(genre)
     }
 
-    @PostMapping("/my-list")
-    fun myList(
-        //@Valid
-        @RequestBody body: MyListRequest
-    ): List<Movie>{
-        return movieService.getMyListMovies(body.email, body.type)
+    @GetMapping("/home")
+    fun getHomeData(): Map<String, List<Movie>> {
+        val genres =
+            listOf("Drama", "Romance", "Action", "Sci-Fi","Thriller", "Crime", "Adventure", "Music",
+                "Comedy", "History", "Mystery", "Sport", "War", "Fantasy", "Animation")
+
+        //val allGenres = movieService.allGenres()
+
+        return genres.associateWith { genre ->
+            movieService.getHomeData(genre)
+        }
     }
 
-    @PostMapping("/add-my-list")
-    fun addMyList(
-        //@Valid
-        @RequestBody body: AddMyListRequest
-    ): Boolean{
-        return movieService.addToMyListMovies(body.email, body.movieId, body.type)
-    }
-
-    @PostMapping("/remove-my-list")
-    fun removeFromMyList(@RequestBody request: AddMyListRequest): Boolean {
-        return movieService.removeFromMyList(request.email, request.movieId, request.type)
-    }
+//    @PostMapping("/my-list")
+//    fun myList(
+//        //@Valid
+//        @RequestBody body: MyListRequest
+//    ): List<Movie>{
+//        return movieService.getMyListMovies(body.email, body.type)
+//    }
+//
+//    @PostMapping("/add-my-list")
+//    fun addMyList(
+//        //@Valid
+//        @RequestBody body: AddMyListRequest
+//    ): Boolean{
+//        return movieService.addToMyListMovies(body.email, body.movieId, body.type)
+//    }
+//
+//    @PostMapping("/remove-my-list")
+//    fun removeFromMyList(@RequestBody request: AddMyListRequest): Boolean {
+//        return movieService.removeFromMyList(request.email, request.movieId, request.type)
+//    }
 }

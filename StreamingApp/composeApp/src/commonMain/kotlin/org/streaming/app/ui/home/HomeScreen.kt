@@ -19,24 +19,30 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import org.streaming.app.CommonVerticalScrollbar
 import org.streaming.app.networking.model.Movie
+import org.streaming.app.ui.auth.LoginScreen
 
 @Composable
 fun HomeScreen(
-    onMovieClick: (Long, String, String, String, Int, Int, String, String) -> Unit,
+    onMovieClick: (Long, String, String, List<String>, Int, Int, String, String) -> Unit,
     homeViewModel: HomeViewModel
 ) {
     LaunchedEffect(Unit) {
-        homeViewModel.dramaTop5()
+        //homeViewModel.dramaTop5()
         homeViewModel.releaseYearTop5()
+        homeViewModel.getHomeContent()
     }
 
     val top5 = homeViewModel.top5
-    val genreTop5 = homeViewModel.top5Drama
+    //val genreTop5 = homeViewModel.top5Drama
+
+    val homeContent = homeViewModel.homeContent
 
     val lazyListState = rememberLazyListState()
 
@@ -46,8 +52,18 @@ fun HomeScreen(
             state = lazyListState
         ) {
             item { FeaturedSection(homeViewModel.top5) }
-            item { MovieCategory("Newest Releases", onMovieClick, false, top5) }
-            item { MovieCategory("Newest Releases Drama", onMovieClick, false, genreTop5) }
+
+            homeContent.forEach { (genre, movies) ->
+                item {
+                    MovieCategory(
+                        title = "Top $genre",
+                        movies = movies,
+                        onMovieClick = onMovieClick,
+                        isLarge = false
+                    )
+                }
+            }
+
             item { Spacer(modifier = Modifier.height(180.dp)) }
         }
 
@@ -134,7 +150,7 @@ fun FeaturedSection(movies: List<Movie>) {
 @Composable
 fun MovieCategory(
     title: String,
-    onMovieClick: (Long, String, String, String, Int, Int, String, String) -> Unit,
+    onMovieClick: (Long, String, String, List<String>, Int, Int, String, String) -> Unit,
     isLarge: Boolean = false, movies: List<Movie>
 ) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
@@ -157,21 +173,38 @@ fun MovieCategory(
                         .height(if (isLarge) 220.dp else 160.dp)
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color.DarkGray)
-                        .clickable { onMovieClick(movie.id,
-                            movie.title, movie.description, movie.genre,
-                            movie.duration, movie.releaseYear, movie.thumbnailUrl, movie.videoUrl
-                        ) }
+                        .clickable {
+                            onMovieClick(movie.id.timestamp, movie.title, movie.description,
+                                movie.genres, movie.duration, movie.releaseYear,
+                                movie.thumbnailUrl, movie.videoUrl)
+                        }
                 ) {
-                    Text(
-                        "Movie ${movie.title}",
-                        color = Color.Gray,
-                        modifier = Modifier.align(Alignment.Center),
-                        fontSize = 10.sp
+                    AsyncImage(
+                        model = movie.thumbnailUrl,
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
                     )
 
-                    AsyncImage(
-                        model =  movie.thumbnailUrl,
-                        contentDescription = null
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
+                                    startY = 100f
+                                )
+                            )
+                    )
+
+                    Text(
+                        text = movie.title,
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.align(Alignment.BottomStart).padding(8.dp),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }
@@ -187,11 +220,11 @@ fun TopNavigation() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text("N", color = Color.Red, fontSize = 35.sp, fontWeight = FontWeight.ExtraBold)
-
-        Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text("TV Shows", color = Color.White, fontSize = 14.sp)
-            Text("Movies", color = Color.White, fontSize = 14.sp)
-            Text("Categories", color = Color.White, fontSize = 14.sp)
-        }
     }
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview(){
+    //HomeScreen()
 }

@@ -26,7 +26,7 @@ import coil3.compose.AsyncImage
 fun DetailsScreen(
     title: String,
     desc: String,
-    genre: String,
+    genres: List<String>,
     duration: Int,
     year: Int,
     url: String,
@@ -78,7 +78,7 @@ fun DetailsScreen(
         Column(modifier = Modifier.padding(16.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 InfoChip(text = "$year")
-                InfoChip(text = genre)
+                InfoChipList(text = genres)
                 InfoChip(text = "$duration min")
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -148,6 +148,25 @@ fun InfoChip(text: String) {
             color = Color.White,
             fontSize = 12.sp
         )
+    }
+}
+
+
+@Composable
+fun InfoChipList(text: List<String>) {
+    Box(
+        modifier = Modifier
+            .background(Color.White.copy(alpha = 0.12f), shape = RoundedCornerShape(50))
+            .padding(horizontal = 10.dp, vertical = 6.dp)
+    ) {
+        for (t in text){
+            Text(
+                text = t,
+                color = Color.White,
+                fontSize = 12.sp
+            )
+        }
+
     }
 }
 

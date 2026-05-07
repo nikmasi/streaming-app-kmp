@@ -15,7 +15,7 @@ data class User(
 @Serializable
 data class LoginRequest(
     val email: String,
-    val hashedPassword: String
+    val password: String
 )
 
 @Serializable
@@ -42,8 +42,11 @@ data class UserInformation(
 
 @Serializable
 data class AuthResponse(
-    val tokens: TokenPair,
-    val userInformation: UserInformation
+    //val tokens: TokenPair,
+    //val userInformation: UserInformation
+
+    val access_token: String,
+    val refresh_token: String
 )
 
 @Serializable

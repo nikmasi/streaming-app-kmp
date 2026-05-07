@@ -19,6 +19,26 @@ class HomeViewModel(
     var top5Drama by mutableStateOf<List<Movie>>(emptyList())
         private set
 
+    var homeContent by mutableStateOf<Map<String, List<Movie>>>(emptyMap())
+        private set
+
+    var isLoading by mutableStateOf(false)
+        private set
+
+    fun getHomeContent() {
+        viewModelScope.launch {
+            isLoading = true
+            try {
+                val response = ktorClient.getHomeData()
+                homeContent = response
+            } catch (e: Exception) {
+                println("Greška pri dohvatanju: ${e.message}")
+            } finally {
+                isLoading = false
+            }
+        }
+    }
+
     fun releaseYearTop5() {
         viewModelScope.launch {
             try {

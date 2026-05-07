@@ -20,6 +20,10 @@ spring:
           uri: http://localhost:8090
           predicates:
             - Path=/api/v1/catalog/**
+        - id: favourites
+          uri: http://localhost:8050
+          predicates:
+            - Path=/api/v1/favourites/**
       globalcors:
         cors-configurations:
           '[/**]':

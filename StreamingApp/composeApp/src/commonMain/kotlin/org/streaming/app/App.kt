@@ -111,9 +111,9 @@ fun App(backStack: SnapshotStateList<Any>) {
             }
             entry<Route.Home> {
                 HomeScreen(
-                    onMovieClick = { id, title, description, genre, duration, releaseYear, thumbnailUrl, videoUrl ->
+                    onMovieClick = { id, title, description, genres, duration, releaseYear, thumbnailUrl, videoUrl ->
                         backStack.add( Route.Details(
-                            id, title, description, genre, duration, releaseYear, thumbnailUrl, videoUrl
+                            id, title, description, genres, duration, releaseYear, thumbnailUrl, videoUrl
                         ))
                     },
                     homeViewModel = homeViewModel
@@ -122,9 +122,9 @@ fun App(backStack: SnapshotStateList<Any>) {
             entry<Route.Search> {
                 SearchScreen(
                     viewModel = movieViewModel,
-                    onMovieClick = { id, title, description, genre, duration, releaseYear, thumbnailUrl, videoUrl ->
+                    onMovieClick = { id, title, description, genres, duration, releaseYear, thumbnailUrl, videoUrl ->
                         backStack.add( Route.Details(
-                            id, title, description, genre, duration, releaseYear, thumbnailUrl, videoUrl
+                            id, title, description, genres, duration, releaseYear, thumbnailUrl, videoUrl
                         ))
                     },
                     userEmail = authViewModel.userProfile.email
@@ -133,9 +133,9 @@ fun App(backStack: SnapshotStateList<Any>) {
             entry<Route.MyList> {
                 MyListScreen(
                     myListViewModel = myListViewModel,
-                    onMovieClick = { id, title, description, genre, duration, releaseYear, thumbnailUrl, videoUrl ->
+                    onMovieClick = { id, title, description, genres, duration, releaseYear, thumbnailUrl, videoUrl ->
                         backStack.add( Route.Details(
-                            id, title, description, genre, duration, releaseYear, thumbnailUrl, videoUrl
+                            id, title, description, genres, duration, releaseYear, thumbnailUrl, videoUrl
                         ))
                     },
                     email = authViewModel.userProfile.email
@@ -150,7 +150,7 @@ fun App(backStack: SnapshotStateList<Any>) {
                     onPlayClick = { backStack.add(Route.VideoPlayer) },
                     onBackClick = { backStack.removeLastOrNull() },
                     desc = route.desc,
-                    genre = route.genre,
+                    genres = route.genres,
                     duration = route.duration,
                     year = route.year,
                     url = route.url,

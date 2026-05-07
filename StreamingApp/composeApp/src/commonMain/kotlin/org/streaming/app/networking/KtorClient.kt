@@ -58,7 +58,7 @@ class KtorClient{
 
             //https://localhost:
 //            defaultRequest {
-//                url("http://192.168.0.14:8080/")
+//                url("http://192.168.0.12:8080/")
 //                contentType(ContentType.Application.Json)
 //            }
 
@@ -66,8 +66,8 @@ class KtorClient{
                 url {
 
                     protocol = URLProtocol.HTTP
-                    host = "192.168.0.14"
-                    port =8080
+                    host = "192.168.0.12"
+                    port =8222
                     headers {
                         append(HttpHeaders.Authorization,"hghjgjhghghhh")
                     }
@@ -82,7 +82,7 @@ class KtorClient{
         val res: AuthResponse = getClient()
             .post{
                 url{
-                    path("/auth/login")
+                    path("/api/v1/auth/authenticate")
                 }
                 contentType(ContentType.Application.Json)
                 setBody(LoginRequest(email, password))
@@ -93,7 +93,7 @@ class KtorClient{
     suspend fun register(email: String, password: String, fullName: String, phone: String): AuthResponse {
         val response = getClient().post{
             url{
-                path("/auth/register")
+                path("/api/v1/auth/register")
             }
             contentType(ContentType.Application.Json)
             setBody(SignUpRequest(email, password, fullName, phone))
@@ -105,7 +105,7 @@ class KtorClient{
     suspend fun updateProfileImage(email: String, profileImage: String): Boolean {
         val response = getClient().post{
             url{
-                path("/user/update-profile-image")
+                path("/api/v1/user/update-profile-image")
             }
             contentType(ContentType.Application.Json)
             setBody(ProfileImageRequest(email, profileImage))
@@ -115,7 +115,7 @@ class KtorClient{
 
     //movie
     suspend fun searchMovies(title: String, email: String): List<Movie> {
-        return getClient().get("movies/search") {
+        return getClient().get("api/v1/catalog/search") {
             parameter("title", title)
             parameter("email", email)
         }.body()
@@ -124,7 +124,7 @@ class KtorClient{
     suspend fun searchHistoryTop10(email: String): List<Search>{
         val response = getClient().post{
             url{
-                path("/user/search-history-top")
+                path("/api/v1/user/search-history-top")
             }
             contentType(ContentType.Application.Json)
             setBody(SearchRequest(email))
@@ -133,11 +133,11 @@ class KtorClient{
     }
 
     suspend fun releaseYearTop5Movies(): List<Movie>{
-        return getClient().get("movies/yearTop5").body()
+        return getClient().get("api/v1/catalog/yearTop5").body()
     }
 
     suspend fun genreTop5Movies(genre: String): List<Movie>{
-        return getClient().get("movies/top5ByGenreOrderByYear"){
+        return getClient().get("api/v1/catalog/top5ByGenreOrderByYear"){
             parameter("genre", genre)
         }.body()
     }
@@ -146,7 +146,7 @@ class KtorClient{
     suspend fun myListMovie(email: String, type: ListType): List<Movie>{
         val response = getClient().post{
             url{
-                path("/movies/my-list")
+                path("/api/v1/catalog/my-list")
             }
             contentType(ContentType.Application.Json)
             setBody(MyListRequest(email = email, type = type))
@@ -157,11 +157,15 @@ class KtorClient{
     suspend fun addMyList(email: String, movieId:Long, type: ListType): List<Movie>{
         val response = getClient().post{
             url{
-                path("/movies/add-my-list")
+                path("/api/v1/catalog/add-my-list")
             }
             contentType(ContentType.Application.Json)
             setBody(AddMyListRequest(email = email, movieId = movieId, type = type))
         }.body<List<Movie>>()
         return response
+    }
+
+    suspend fun getHomeData(): Map<String,List<Movie>>{
+        return getClient().get("api/v1/catalog/home").body()
     }
 }
