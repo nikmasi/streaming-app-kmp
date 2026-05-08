@@ -20,6 +20,12 @@
       <module name="gateway" options="-parameters" />
       <module name="gateway.main" options="-parameters" />
       <module name="gateway.test" options="-parameters" />
+      <module name="playback" options="-parameters" />
+      <module name="playback.main" options="-parameters" />
+      <module name="playback.test" options="-parameters" />
+      <module name="search" options="-parameters" />
+      <module name="search.main" options="-parameters" />
+      <module name="search.test" options="-parameters" />
       <module name="spring_boot.spring_boot" options="-parameters" />
       <module name="spring_boot.spring_boot.main" options="-parameters" />
       <module name="spring_boot.spring_boot.test" options="-parameters" />

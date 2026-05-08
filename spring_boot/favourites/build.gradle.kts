@@ -34,8 +34,16 @@ dependencies {
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-	//mongo db
+	// mongo db
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+
+	// zipkin
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+
+	// openfeign
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 }
 
 dependencyManagement {
