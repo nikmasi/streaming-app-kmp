@@ -40,7 +40,8 @@ class SecurityConfig(
     fun corsConfigurationSource(): org.springframework.web.cors.CorsConfigurationSource {
         val configuration = org.springframework.web.cors.CorsConfiguration()
 
-        configuration.allowedOrigins = listOf("http://localhost:8081", "http://localhost:8080")
+        configuration.allowedOrigins = listOf("http://localhost:8081", "http://localhost:8080",
+            "http://localhost:4200")
 
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")

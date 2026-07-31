@@ -1,7 +1,7 @@
 plugins {
 	kotlin("jvm") version "2.2.21"
 	kotlin("plugin.spring") version "2.2.21"
-	id("org.springframework.boot") version "3.3.1"
+	id("org.springframework.boot") version "3.3.13"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -45,6 +45,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")
 	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+
+	// load balanceer
+	implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
 }
 
 dependencyManagement {
