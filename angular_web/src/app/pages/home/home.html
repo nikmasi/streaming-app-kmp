@@ -1,0 +1,71 @@
+<div class="netflix-home">
+  <!-- Navigacioni meni -->
+  <header class="navbar" [ngClass]="{'scrolled': isScrolled}">
+    <div class="nav-left">
+      <div class="logo">NETFLIX</div>
+      <nav class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#">TV Shows</a>
+        <a href="#">Movies</a>
+        <a href="my-list">My List</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn"><span class="material-icons" (click)="search()">search</span></button>
+      <button class="icon-btn"><span class="material-icons">notifications</span></button>
+      <div class="profile-menu">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profil">
+      </div>
+    </div>
+  </header>
+
+  <!-- Glavni Baner (Hero Section) -->
+  <section class="hero" style="background-image: linear-gradient(to top, #141414, transparent 50%), linear-gradient(to right, #141414, transparent 50%), url('https://image.tmdb.org/t/p/original/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg')">
+    <div class="hero-content">
+      <h1 class="hero-title">STRANGER THINGS</h1>
+      <p class="hero-description">
+        Kada dečak nestane, mali grad otkriva misteriju koja uključuje tajne eksperimente, zastrašujuće natprirodne sile i jednu čudnu devojčicu.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-play">
+          <span class="material-icons">play_arrow</span> Pusti
+        </button>
+        <button class="btn btn-info">
+          <span class="material-icons">info</span> Više informacija
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sekcije sa filmovima (Redovi) -->
+  <main class="content-rows">
+
+  <section class="row-section" *ngFor="let genre of getGenres()">
+
+    <h2>{{ genre }}</h2>
+
+    <div class="row-slider">
+
+      <div class="card"
+          *ngFor="let movie of data[genre]"
+          (click)="openMovie(movie)">
+
+          <img
+              [src]="movie.thumbnailUrl"
+              [alt]="movie.title">
+
+          <div class="card-content">
+              <h3>{{ movie.title }}</h3>
+              <p>{{ movie.releaseYear }}</p>
+          </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+</main>
+
+</div>

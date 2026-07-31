@@ -1,0 +1,19 @@
+<div class="my-list">
+
+    <h1>My List</h1>
+
+    <div class="movies">
+
+        <div class="card" *ngFor="let i of [1,2,3,4,5,6]">
+
+            <img src="https://picsum.photos/300/170?random={{i}}">
+
+            <h3>Movie {{i}}</h3>
+
+            <button>Remove</button>
+
+        </div>
+
+    </div>
+
+</div>
