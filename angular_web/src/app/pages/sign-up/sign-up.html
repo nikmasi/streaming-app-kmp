@@ -10,13 +10,12 @@
 
   <div class="content">
     <h1>Unlimited movies, TV shows, and more</h1>
-    <h2>Starts at €4.99. Cancel anytime.</h2>
     <p>
       Ready to watch? Enter your email to create or restart your membership.
     </p>
 
     <div class="email-box">
-      <input type="email" placeholder="Email address">
+      <input type="email" [(ngModel)]="email" placeholder="Email address">
 
       <button (click)="sign_up()">
         Get Started >

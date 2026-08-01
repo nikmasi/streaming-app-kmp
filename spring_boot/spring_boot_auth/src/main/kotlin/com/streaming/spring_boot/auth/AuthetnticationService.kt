@@ -30,7 +30,6 @@ class AuthenticationService(
         val user = User(
             email = request.email,
             role = request.role,
-            id = 1,
             hashedPassword = passwordEncoder.encode(request.password) ?: "",
             firstname = request.firstname,
             lastname = request.lastname,

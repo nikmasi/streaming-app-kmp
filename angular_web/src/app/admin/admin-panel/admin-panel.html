@@ -1,0 +1,113 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <h2>Admin</h2>
+
+    <ul>
+      <li class="active" routerLink="/admin-panel" routerLinkActive="active" >Dashboard</li>
+      <li routerLink="/admin-movies" routerLinkActive="active">Movies</li>
+      <li routerLink="/admin-tvshows" routerLinkActive="active">TV Shows</li>
+      <li routerLink="/admin-users" routerLinkActive="active">Users</li>
+      <li routerLink="/admin-categories" routerLinkActive="active">Categories</li>
+      <li routerLink="/admin-analytics" routerLinkActive="active">Analytics</li>
+      <li routerLink="/admin-settings" routerLinkActive="active">Settings</li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <h1>Dashboard</h1>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Movies</h3>
+        <p>245</p>
+      </div>
+
+      <div class="card">
+        <h3>Series</h3>
+        <p>37</p>
+      </div>
+
+      <div class="card">
+        <h3>Users</h3>
+        <p>12,542</p>
+      </div>
+
+      <div class="card">
+        <h3>Watch Hours</h3>
+        <p>53,812</p>
+      </div>
+
+    </div>
+
+    <div class="table-container">
+
+      <div class="table-header">
+        <h2>Latest Movies</h2>
+
+        <button>Add Movie</button>
+      </div>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Poster</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>
+              <img src="https://via.placeholder.com/60x90">
+            </td>
+
+            <td>Interstellar</td>
+            <td>Sci-Fi</td>
+            <td>2014</td>
+
+            <td>
+              <span class="status">Published</span>
+            </td>
+
+            <td>
+              <button>Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              <img src="https://via.placeholder.com/60x90">
+            </td>
+
+            <td>Breaking Bad</td>
+            <td>Drama</td>
+            <td>2008</td>
+
+            <td>
+              <span class="status">Published</span>
+            </td>
+
+            <td>
+              <button>Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+  </main>
+</div>

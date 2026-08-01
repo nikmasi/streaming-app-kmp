@@ -1,0 +1,30 @@
+<div class="landing-page">
+  <header class="header">
+    <h1 class="logo">NETFLIX</h1>
+
+    <button class="sign-in" (click)="sign_in()"> Sign In </button>
+  </header>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="password-card">
+      <span class="step"> STEP 1 OF 2 </span>
+
+      <h1>Create a firstname and lastname to start your membership</h1>
+
+      <p>
+        Just a few more steps and you're done! We hate paperwork, too.
+      </p>
+
+      <p class="email"> {{ email }} </p>
+
+      <input type="firstname" placeholder="Firstname" [(ngModel)]="firstname">
+
+      <input type="lastname" placeholder="Lastname" [(ngModel)]="lastname">
+
+      <button class="next-btn" (click)="sign_up()"> Next </button>
+
+    </div>
+  </div>
+</div>

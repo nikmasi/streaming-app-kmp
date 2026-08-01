@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Auth } from '../../service/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,9 +14,29 @@ import { FormsModule } from '@angular/forms';
 export class SignIn {
   email = '';
   password = '';
+  router = inject(Router);
+
+  authService = inject(Auth);
 
   signIn() {
-    console.log(this.email, this.password);
+    this.authService.authenticate({
+      email: this.email,
+      password: this.password,
+    })
+    .subscribe({
+      next: (response) => {
+
+        console.log("Sign In success", response);
+        localStorage.setItem("access_token", response.access_token);
+        localStorage.setItem("refresh_token", response.refresh_token);
+
+        this.router.navigate(['/home']);
+      },
+
+      error: (error) => {
+        console.log("Registration failed", error);
+      }
+    });
   }
 
 }

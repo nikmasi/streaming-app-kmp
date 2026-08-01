@@ -59,5 +59,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/search'])
   }
 
+  profile(){
+    this.router.navigate(['/profile'])
+  }
 
 }
