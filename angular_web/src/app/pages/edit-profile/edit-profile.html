@@ -1,0 +1,45 @@
+<div class="edit-page">
+  <div class="edit-card">
+
+    <h1>Edit Profile</h1>
+    <div class="avatar-container">
+      <img 
+        [src]=" 
+        'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'"
+        class="avatar">
+    </div>
+
+    <form (ngSubmit)="save()">
+      <div class="field">
+        <label>First Name</label>
+        <input 
+          type="text"
+          [(ngModel)]="user.firstname"
+          name="firstname">
+      </div>
+
+      <div class="field">
+        <label>Last Name</label>
+        <input 
+          type="text"
+          [(ngModel)]="user.lastname"
+          name="lastname">
+      </div>
+
+      <div class="buttons">
+        <button 
+          type="submit"
+          class="save">
+          Save Changes
+        </button>
+
+        <button 
+          type="button"
+          routerLink="/profile"
+          class="cancel">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

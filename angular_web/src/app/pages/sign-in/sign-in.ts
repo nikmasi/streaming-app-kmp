@@ -16,6 +16,8 @@ export class SignIn {
   password = '';
   router = inject(Router);
 
+  error = '';
+
   authService = inject(Auth);
 
   signIn() {
@@ -25,16 +27,16 @@ export class SignIn {
     })
     .subscribe({
       next: (response) => {
-
-        console.log("Sign In success", response);
         localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
+
+        localStorage.setItem("email", this.email);
 
         this.router.navigate(['/home']);
       },
 
       error: (error) => {
-        console.log("Registration failed", error);
+        this.error ="Registration failed"
       }
     });
   }

@@ -44,12 +44,10 @@ export class SignUpPassword {
     })
     .subscribe({
       next: (response) => {
-
-        console.log("Registration success", response);
-
         localStorage.setItem("access_token", response.access_token);
-
         localStorage.setItem("refresh_token", response.refresh_token);
+
+        localStorage.setItem("email", this.email);
 
         this.router.navigate(['/home']);
       },

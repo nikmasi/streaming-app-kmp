@@ -1,14 +1,9 @@
 package com.streaming.spring_boot.catalog.controller
 
-//import com.streaming.spring_boot.catalog.model.ListType
 import com.streaming.spring_boot.catalog.model.Movie
 import com.streaming.spring_boot.catalog.service.MovieService
-import org.bson.types.ObjectId
 import org.springframework.web.bind.annotation.CrossOrigin
-
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController

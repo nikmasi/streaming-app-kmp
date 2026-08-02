@@ -1,88 +1,49 @@
 <div class="profile-page">
-
   <div class="profile-card">
-
     <div class="profile-header">
-
-      
-
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profil" class="avatar">
       <div>
 
-        <h1>John Doe</h1>
-
-        <p>john.doe@gmail.com</p>
-
-        <span class="role">Premium Member</span>
-
+        <h1>{{user.firstname}} {{user.lastname}}</h1>
+        <p>{{user.email}}</p>
+        <span class="role">{{user.role}}</span>
       </div>
 
     </div>
-
     <hr>
 
     <div class="profile-info">
 
       <div class="info">
-
         <label>First Name</label>
-        <p>John</p>
-
+        <p>{{user.firstname}}</p>
       </div>
-
       <div class="info">
-
         <label>Last Name</label>
-        <p>Doe</p>
-
+        <p>{{user.lastname}}</p>
       </div>
 
       <div class="info">
-
         <label>Email</label>
-        <p>john.doe@gmail.com</p>
-
+        <p>{{user.email}}</p>
       </div>
 
       <div class="info">
-
-        <label>Phone</label>
-        <p>+381 64 123 4567</p>
-
-      </div>
-
-      <div class="info">
-
         <label>Plan</label>
-        <p>Premium</p>
-
+        <p>{{user.role}}</p>
       </div>
-
-      <div class="info">
-
-        <label>Member Since</label>
-        <p>August 2026</p>
-
-      </div>
-
     </div>
 
     <div class="buttons">
-
-      <button class="edit">
+      <button class="edit" (click)="edit_profile()">
         Edit Profile
       </button>
-
       <button class="password">
         Change Password
       </button>
-
-      <button class="logout">
+      <button class="logout" (click)="logout()">
         Logout
       </button>
-
     </div>
-
   </div>
-
 </div>

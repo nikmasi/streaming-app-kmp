@@ -24,6 +24,7 @@ class SecurityConfig(
                 auth
                     .requestMatchers("/").permitAll()
                     .requestMatchers("/api/v1/auth/**").permitAll()
+                    .requestMatchers("/api/v1/user/**").permitAll()
                     .requestMatchers("/api/v1/catalog/**").permitAll()
                     .requestMatchers("/user/**").permitAll()
                     .dispatcherTypeMatchers(DispatcherType.ERROR, DispatcherType.FORWARD).permitAll()

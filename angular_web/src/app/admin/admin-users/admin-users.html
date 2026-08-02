@@ -17,6 +17,48 @@
 
     <h1>Admin Users</h1>
 
-    
+    <div class="table-container">
+
+    <div class="table-header">
+        <h2>Users</h2>
+
+        <button (click)="addUser()"> Add User </button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Avatar</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>
+                    <img [src]="user.profileImage || 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'">
+                </td>
+
+                <td> {{user.firstname}}</td>
+                <td> {{user.lastname}} </td>
+                <td>{{user.email}}</td>
+
+                <td>
+                    <span class="status"> {{user.role}} </span>
+                </td>
+
+                <td>
+                    <button (click)="editUser(user)"> Edit </button>
+                    <button class="delete">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
   </main>
 </div>
