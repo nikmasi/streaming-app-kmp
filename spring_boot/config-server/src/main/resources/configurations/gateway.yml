@@ -38,6 +38,11 @@ spring:
           uri: lb://favourites
           predicates:
             - Path=/api/v1/favourites/**
+
+        - id: playback
+          uri: lb://playback
+          predicates:
+            - Path=/api/v1/playback/**
       globalcors:
         cors-configurations:
           '[/**]':

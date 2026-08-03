@@ -30,8 +30,6 @@ import org.streaming.app.networking.model.ProfileImageRequest
 import org.streaming.app.networking.model.Search
 import org.streaming.app.networking.model.SearchRequest
 import org.streaming.app.networking.model.SignUpRequest
-import org.streaming.app.networking.model.TokenPair
-import org.streaming.app.networking.model.User
 
 class KtorClient{
     fun getClient(): HttpClient {
@@ -66,7 +64,7 @@ class KtorClient{
                 url {
 
                     protocol = URLProtocol.HTTP
-                    host = "192.168.0.12"
+                    host = "10.0.2.2"
                     port =8222
                     headers {
                         append(HttpHeaders.Authorization,"hghjgjhghghhh")

@@ -1,0 +1,50 @@
+<div class="upload-container">
+    <div class="card">
+        <h1>Add Movie</h1>
+
+        <form (ngSubmit)="uploadMovie()">
+            <div class="field">
+                <label>Title</label>
+                <input type="text" [(ngModel)]="movie.title" name="title">
+            </div>
+
+            <div class="field">
+                <label>Description</label>
+
+                <textarea rows="5" [(ngModel)]="movie.description" name="description">
+                </textarea>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <label>Release year</label>
+                    <input type="number" [(ngModel)]="movie.releaseYear" name="releaseYear">
+                </div>
+
+                <div class="field">
+                    <label>Duration (minutes)</label>
+                    <input type="number" [(ngModel)]="movie.duration" name="duration">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Genres (comma separated)</label>
+                <input type="text" [(ngModel)]="genres" name="genres">
+            </div>
+
+            <div class="field">
+                <label>Thumbnail</label>
+                <input type="file" accept="image/*" (change)="onThumbnailSelected($event)">
+            </div>
+
+            <div class="field">
+                <label>Movie</label>
+                <input type="file" accept="video/mp4" (change)="onVideoSelected($event)">
+            </div>
+
+            <button type="submit">
+                Upload Movie
+            </button>
+        </form>
+    </div>
+</div>

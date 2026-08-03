@@ -1,18 +1,24 @@
 package com.streaming.spring_boot.catalog.controller
 
+import com.streaming.spring_boot.catalog.client.PlaybackClient
 import com.streaming.spring_boot.catalog.model.Movie
 import com.streaming.spring_boot.catalog.service.MovieService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
+import java.nio.file.Paths
+import java.util.UUID
 
 @RestController
 @RequestMapping("/api/v1/catalog")
 @CrossOrigin(origins = ["http://localhost:4200"])
 class MovieController(
     private val movieService: MovieService,
+    private val playbackClient: PlaybackClient
     //private val userService: UserService
 ) {
     data class MoviesTitleRequest(
@@ -86,4 +92,42 @@ class MovieController(
 //    fun removeFromMyList(@RequestBody request: AddMyListRequest): Boolean {
 //        return movieService.removeFromMyList(request.email, request.movieId, request.type)
 //    }
+
+
+    @PostMapping("/admin/movie")
+    fun uploadMovie(
+        @RequestParam title: String,
+        @RequestParam description: String,
+        @RequestParam genres: String,
+        @RequestParam duration: Int,
+        @RequestParam releaseYear: Int,
+        @RequestParam thumbnail: MultipartFile,
+        @RequestParam video: MultipartFile
+    ): Movie {
+        // save thumbnail
+        val thumbnailPath = movieService.saveFile(thumbnail, "storage/thumbnails")
+
+        // save database
+        var movie = Movie(
+            title = title,
+            description = description,
+            genres = genres.split(","),
+            duration = duration,
+            releaseYear = releaseYear,
+            thumbnailUrl = thumbnailPath.toString(),
+            videoUrl = ""
+        )
+
+        movieService.saveMovie(movie);
+
+        val playback =
+            playbackClient.uploadVideo(
+                movie.id!!.toHexString(),
+                video
+            )
+
+        movie = movie.copy(videoUrl = playback.streamUrl)
+
+        return movieService.saveMovie(movie)
+    }
 }

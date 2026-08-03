@@ -133,6 +133,25 @@ services:
       discovery:
         condition: service_healthy
 
+  playback:
+    build:
+      context: ./playback
+      dockerfile: Dockerfile
+    container_name: playback
+    ports:
+      - "8080:8080"
+    networks:
+      - streaming-network
+    depends_on:
+      mongodb:
+        condition: service_started
+      postgres:
+        condition: service_started
+      config-server:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+
 
 volumes:
   postgres-data:

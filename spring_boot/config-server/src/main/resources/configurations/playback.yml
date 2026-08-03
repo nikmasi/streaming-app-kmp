@@ -6,11 +6,11 @@ eureka:
       defaultZone: http://discovery:8761/eureka/
 
 server:
-  port: 8090
+  port: 8080
 
 spring:
   application:
-    name: catalog
+    name: playback
 
   servlet:
     multipart:
@@ -21,10 +21,6 @@ spring:
     mongodb:
       uri: mongodb://mongodb:27017/catalog_db
       database: catalog_db
-
-  logging:
-    level:
-      org.springframework.data.mongodb.core.MongoTemplate: DEBUG
 
 management:
   tracing:

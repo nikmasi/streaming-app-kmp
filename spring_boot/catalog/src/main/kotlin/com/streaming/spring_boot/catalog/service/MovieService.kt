@@ -11,6 +11,11 @@ import com.streaming.spring_boot.catalog.repository.MovieRepository
 import com.streaming.spring_boot.catalog.model.Movie
 //import com.streaming.spring_boot.catalog.model.UserList
 import org.bson.types.ObjectId
+import org.springframework.web.multipart.MultipartFile
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.util.UUID
 
 @Service
 class MovieService(
@@ -84,4 +89,18 @@ class MovieService(
 //
 //        return true
 //    }
+
+    fun saveFile(file: MultipartFile, folder: String): Path {
+        val dir = Paths.get(folder)
+        Files.createDirectories(dir)
+        val fileName = UUID.randomUUID().toString() + "_" + file.originalFilename
+        val path = dir.resolve(fileName)
+        file.transferTo(path)
+        return path
+    }
+
+    fun saveMovie(movie: Movie): Movie{
+        return movieRepository.save(movie);
+    }
+
 }

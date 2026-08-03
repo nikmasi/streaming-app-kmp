@@ -5,12 +5,14 @@
     <string name="get_started_btn">GET STARTED</string>
     <string name="get_started_sign_in_btn">SIGN IN</string>
     <string name="sign_in">Sign In</string>
-    <string name="email_phone_input">Email or phone number</string>
+    <string name="email_phone_input">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="create_account">Create Account</string>
     <string name="join_us">Join us and start streaming today.</string>
     <string name="full_name">Full name</string>
+    <string name="first_name">Firstname</string>
+    <string name="last_name">Lastname</string>
     <string name="email">Email Address</string>
     <string name="phone">Phone</string>
     <string name="confirm_password">Confirm Password</string>

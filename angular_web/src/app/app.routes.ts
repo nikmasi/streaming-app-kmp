@@ -18,6 +18,7 @@ import { AdminTvshows } from './admin/admin-tvshows/admin-tvshows';
 import { AdminSettings } from './admin/admin-settings/admin-settings';
 import { AdminUsers } from './admin/admin-users/admin-users';
 import { EditProfile } from './pages/edit-profile/edit-profile';
+import { AdminUploadVideo } from './admin/admin-upload-video/admin-upload-video';
 
 export const routes: Routes = [
     {path:"", component:SignUp},
@@ -39,4 +40,5 @@ export const routes: Routes = [
     {path:"admin-settings", component: AdminSettings},
     {path:"admin-users", component: AdminUsers},
     {path:"edit-profile", component: EditProfile},
+    {path:"admin-upload-video", component: AdminUploadVideo},
 ];

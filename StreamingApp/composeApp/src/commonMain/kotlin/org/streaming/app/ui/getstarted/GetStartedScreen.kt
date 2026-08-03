@@ -17,9 +17,9 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,12 +37,18 @@ import streamingapp.composeapp.generated.resources.get_started_sign_in_btn
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun GetStartedScreen(
-    onGetStartedClick: () -> Unit,
+    onGetStartedClick: () ->Unit,
     onLocalChange: () -> Unit
 ) {
-    Scaffold { padding ->
+    Scaffold(
+        containerColor = Color.Black
+    ) { padding ->
+
         Box(
-            modifier = Modifier.fillMaxSize().background(Color.Black) //.padding(padding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .background(Color.Black)
         ) {
             Image(
                 painter = painterResource(Res.drawable.get_started),
@@ -51,103 +57,106 @@ fun GetStartedScreen(
                 contentScale = ContentScale.Crop
             )
 
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = androidx.compose.ui.graphics.Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.5f), Color.Black),
-                        startY = 0f
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black.copy(alpha = 0.25f),
+                                Color.Black.copy(alpha = 0.85f),
+                                Color.Black
+                            )
+                        )
                     )
-                )
             )
 
             Column(
-                modifier = Modifier.fillMaxSize().padding(24.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Spacer(modifier = Modifier.height(22.dp))
-                Text(
-                    text = "NETFLIXCLONE",
-                    style = TextStyle(
-                        color = Color(0xFFE50914),
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        letterSpacing = (-1).sp,
-                        shadow = androidx.compose.ui.graphics.Shadow(
-                            color = Color.Black.copy(alpha = 0.5f),
-                            offset = androidx.compose.ui.geometry.Offset(2f, 4f),
-                            blurRadius = 4f
-                        )
-                    ),
-                    modifier = Modifier.padding(top = 40.dp)
-                )
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.height(52.dp))
 
                 Text(
-                    text = stringResource(Res.string.get_started),
-                    style = TextStyle(
-                        fontSize = 28.sp,
+                    text = "NETFLIX",
+                    color = Color(0xFFE50914),
+                    fontSize = 34.sp,
+                    fontWeight = FontWeight.Black,
+                    letterSpacing = (-1).sp
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                Column(
+                    modifier = Modifier.widthIn(max = 360.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Text(
+                        text = stringResource(Res.string.get_started),
+                        fontSize = 36.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White,
                         textAlign = TextAlign.Center,
-                        lineHeight = 34.sp
+                        lineHeight = 42.sp
                     )
-                )
-                Spacer(modifier = Modifier.height(12.dp))
 
-                Text(
-                    text = stringResource(Res.string.get_started_desc),
-                    style = TextStyle(
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(Res.string.get_started_desc),
+                        color = Color(0xFFE5E5E5),
                         fontSize = 16.sp,
-                        color = Color.LightGray,
+                        lineHeight = 24.sp,
                         textAlign = TextAlign.Center
                     )
-                )
-                Spacer(modifier = Modifier.height(32.dp))
 
-                Column(
-                    modifier = Modifier.widthIn(max = 400.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+                    Spacer(modifier = Modifier.height(32.dp))
+
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(56.dp)
-                            .background(color = Color(0xFFE50914), shape = RoundedCornerShape(4.dp))
+                            .height(54.dp)
+                            .background(
+                                Color(0xFFE50914),
+                                RoundedCornerShape(4.dp)
+                            )
                             .clickable { onGetStartedClick() },
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = stringResource(Res.string.get_started_btn),
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White,
-                                letterSpacing = 1.sp
-                            )
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Spacer(modifier = Modifier.height(14.dp))
 
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(56.dp)
-                            .background(color = Color.White.copy(alpha = 0.1f), shape = RoundedCornerShape(4.dp))
+                            .height(54.dp)
+                            .background(
+                                Color(0xFF333333),
+                                RoundedCornerShape(4.dp)
+                            )
                             .clickable { onLocalChange() },
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = stringResource(Res.string.get_started_sign_in_btn),
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(44.dp))
+                Spacer(modifier = Modifier.height(48.dp))
             }
         }
     }

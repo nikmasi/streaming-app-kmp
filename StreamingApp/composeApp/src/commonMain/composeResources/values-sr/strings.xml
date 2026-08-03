@@ -5,12 +5,14 @@
     <string name="get_started_btn">REGISTRUJ SE</string>
     <string name="get_started_sign_in_btn">PRIJAVI SE</string>
     <string name="sign_in">Prijavi se</string>
-    <string name="email_phone_input">Imejl ili broj telefona</string>
+    <string name="email_phone_input">Imejl</string>
     <string name="password">Lozinka</string>
     <string name="forgot_password">Zaboravili ste lozinku?</string>
     <string name="create_account">Kreiraj nalog</string>
     <string name="join_us">Pridruži nam se i počni sa strimovanjem sadržaja.</string>
     <string name="full_name">Ime i prezime</string>
+    <string name="first_name">Ime</string>
+    <string name="last_name">Prezime</string>
     <string name="email">Imejl adresa</string>
     <string name="phone">Broj telefona</string>
     <string name="confirm_password">Potvrdi lozinku</string>
