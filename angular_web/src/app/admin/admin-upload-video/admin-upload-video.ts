@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Admin } from '../../service/admin';
 
 @Component({
   selector: 'app-admin-upload-video',
@@ -18,6 +19,8 @@ export class AdminUploadVideo {
   genres = '';
   thumbnail?: File;
   video?: File;
+
+  adminService = inject(Admin)
 
   onThumbnailSelected(event: any){
     this.thumbnail = event.target.files[0];
@@ -51,7 +54,14 @@ export class AdminUploadVideo {
       formData.append("video", this.video);
     }
 
-    // this.movieService.uploadMovie(formData)
-    //      .subscribe(...)
+    this.adminService.uploadMovie(formData)
+          .subscribe({
+      next: (response) => {
+        alert(response)
+
+      },
+      error: (error) => {
+      }
+    });
   }
 }

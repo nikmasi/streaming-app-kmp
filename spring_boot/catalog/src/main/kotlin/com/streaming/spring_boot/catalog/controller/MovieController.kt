@@ -118,7 +118,9 @@ class MovieController(
             videoUrl = ""
         )
 
-        movieService.saveMovie(movie);
+
+
+        movie  = movieService.saveMovie(movie);
 
         val playback =
             playbackClient.uploadVideo(

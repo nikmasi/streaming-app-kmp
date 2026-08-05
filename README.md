@@ -9,7 +9,8 @@ This project is a full-stack streaming platform built with Kotlin Multiplatform 
 **Currently in active development**
 
 ### Implemented
-- Kotlin Multiplatform frontend (Android, TV, Web)
+- Kotlin Multiplatform frontend (Android, TV)
+- Angular frontend
 - JWT authentication & authorization
 - API Gateway
 - Eureka Discovery Server
@@ -17,6 +18,7 @@ This project is a full-stack streaming platform built with Kotlin Multiplatform 
 - Auth microservice
 - Catalog microservice
 - Favourites microservice
+- Playback microservice
 - Distributed tracing with Zipkin
 - PostgreSQL & MongoDB integration
 - Synchronous inter-service communication

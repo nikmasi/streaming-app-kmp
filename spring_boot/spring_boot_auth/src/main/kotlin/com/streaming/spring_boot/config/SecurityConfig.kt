@@ -26,6 +26,7 @@ class SecurityConfig(
                     .requestMatchers("/api/v1/auth/**").permitAll()
                     .requestMatchers("/api/v1/user/**").permitAll()
                     .requestMatchers("/api/v1/catalog/**").permitAll()
+                    .requestMatchers("/api/v1/playback/**").permitAll()
                     .requestMatchers("/user/**").permitAll()
                     .dispatcherTypeMatchers(DispatcherType.ERROR, DispatcherType.FORWARD).permitAll()
                     .anyRequest().authenticated()

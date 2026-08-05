@@ -34,6 +34,9 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
 }
 
 dependencyManagement {
