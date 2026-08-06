@@ -8,3 +8,9 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+
+# Storage
+spring_boot/playback/storage/uploads/
+spring_boot/playback/storage/hls/
+spring_boot/catalog/storage/thumbnails/

@@ -12,13 +12,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun VideoPlayerScreen(onBackClick: () -> Unit) {
-    // na mobilnom landscape
-    Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        Text("Video Player Placeholder", color = Color.White, modifier = Modifier.align(Alignment.Center))
+fun VideoPlayerScreen(
+    videoUrl:String,
+    onBackClick: () -> Unit
+) {
 
-        IconButton(onClick = onBackClick, modifier = Modifier.padding(16.dp).align(Alignment.TopStart)) {
-            Icon(Icons.Default.Close, contentDescription = "Close Player", tint = Color.White)
+    Box(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.Black)
+    ) {
+        println(videoUrl)
+
+        HlsPlayer(
+            url = videoUrl,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        IconButton(
+            onClick = onBackClick,
+            modifier =
+                Modifier
+                    .padding(16.dp)
+                    .align(Alignment.TopStart)
+        ){
+
+            Icon(
+                Icons.Default.Close,
+                contentDescription=null,
+                tint=Color.White
+            )
         }
     }
 }

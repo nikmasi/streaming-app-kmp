@@ -2,6 +2,12 @@ import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Obavezno uvezi ovo
 import { Catalog } from '../../service/catalog';
 import { Router } from '@angular/router';
+import { Movie } from '../../model/movie';
+
+export const environment = {
+  apiUrl: 'http://localhost:8222'
+};
+
 
 @Component({
   selector: 'app-home',
@@ -62,5 +68,10 @@ export class HomeComponent implements OnInit {
   profile(){
     this.router.navigate(['/profile'])
   }
+
+  getThumbnailUrl(movie: Movie): string {
+    return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
+  }
+
 
 }

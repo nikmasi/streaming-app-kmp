@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import org.streaming.app.CommonVerticalScrollbar
+import org.streaming.app.networking.Constants
 import org.streaming.app.networking.model.Movie
 import org.streaming.app.ui.auth.LoginScreen
 
@@ -116,7 +117,7 @@ fun FeaturedSection(movies: List<Movie>) {
             val movie = movies[page]
 
             AsyncImage(
-                model = movie.thumbnailUrl,
+                model = Constants.imageUrl(movie.thumbnailUrl),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
@@ -180,7 +181,7 @@ fun MovieCategory(
                         }
                 ) {
                     AsyncImage(
-                        model = movie.thumbnailUrl,
+                        model = Constants.imageUrl(movie.thumbnailUrl),
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop

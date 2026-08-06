@@ -24,6 +24,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import org.streaming.app.networking.Constants
 
 @Composable
 fun MovieItem(movie: Movie, onClick: () -> Unit) {
@@ -45,7 +46,7 @@ fun MovieItem(movie: Movie, onClick: () -> Unit) {
             ) {
                 //Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(4.dp)) {
                     AsyncImage(
-                        model = movie.thumbnailUrl,
+                        model =  Constants.imageUrl(movie.thumbnailUrl),
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop

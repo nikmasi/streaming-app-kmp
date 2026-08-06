@@ -176,10 +176,10 @@ fun App(backStack: SnapshotStateList<Any>) {
             }
             entry<Route.VideoPlayer> {
                 VideoPlayerScreen(
+                    videoUrl = "http://10.0.2.2:8080/hls/6a74847b0c275b7e5184c61b/master.m3u8",
                     onBackClick = { backStack.add(Route.Details) }
                 )
             }
         }
     )
-
 }

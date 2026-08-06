@@ -1,0 +1,8 @@
+playback/storage/uploads/*
+!playback/storage/uploads/.gitkeep
+
+playback/storage/hls/*
+!playback/storage/hls/.gitkeep
+
+catalog/storage/thumbnails/*
+!catalog/storage/thumbnails/.gitkeep

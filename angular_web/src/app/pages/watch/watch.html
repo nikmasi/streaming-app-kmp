@@ -1,20 +1,19 @@
 <div class="watch-page">
 
-    <video 
-        #player
-        controls
-        autoplay>
-    </video>
-
-
-    <div class="movie-info">
-
-        <h1>Spider-Man</h1>
-
-        <p>
-            Movie
-        </p>
-
+    <div class="player-container">
+        <video #player controls autoplay>
+        </video>
     </div>
 
+    <div class="movie-info">
+        <h1>{{movie.title}}</h1>
+
+        <div class="meta">
+            <span>{{movie.releaseYear}}</span>
+            <span>•</span>
+            <span>{{movie.duration}} min</span>
+        </div>
+
+        <p>{{movie.description}}</p>
+    </div>
 </div>

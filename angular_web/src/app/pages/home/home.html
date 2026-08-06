@@ -19,18 +19,19 @@
   </header>
 
   <!-- Glavni Baner (Hero Section) -->
-  <section class="hero" style="background-image: linear-gradient(to top, #141414, transparent 50%), linear-gradient(to right, #141414, transparent 50%), url('https://image.tmdb.org/t/p/original/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg')">
+  <section class="hero" style="background-image: linear-gradient(to top, #141414, transparent 50%), linear-gradient(to right, #141414, transparent 50%), 
+  url('https://image.tmdb.org/t/p/original/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg')">
     <div class="hero-content">
-      <h1 class="hero-title">STRANGER THINGS</h1>
+      <h1 class="hero-title">Spider Man</h1>
       <p class="hero-description">
-        Kada dečak nestane, mali grad otkriva misteriju koja uključuje tajne eksperimente, zastrašujuće natprirodne sile i jednu čudnu devojčicu.
+        Spider-Man
       </p>
       <div class="hero-buttons">
         <button class="btn btn-play">
-          <span class="material-icons">play_arrow</span> Pusti
+          <span class="material-icons">play_arrow</span> Play
         </button>
         <button class="btn btn-info">
-          <span class="material-icons">info</span> Više informacija
+          <span class="material-icons">info</span> More informations
         </button>
       </div>
     </div>
@@ -49,9 +50,7 @@
           *ngFor="let movie of data[genre]"
           (click)="openMovie(movie)">
 
-          <img
-              [src]="movie.thumbnailUrl"
-              [alt]="movie.title">
+          <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
 
           <div class="card-content">
               <h3>{{ movie.title }}</h3>
@@ -59,12 +58,8 @@
           </div>
 
       </div>
-
-
     </div>
-
   </section>
-
 </main>
 
 </div>

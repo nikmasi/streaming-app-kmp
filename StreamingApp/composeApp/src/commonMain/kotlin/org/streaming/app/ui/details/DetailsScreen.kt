@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import org.streaming.app.networking.Constants
 
 @Composable
 fun DetailsScreen(
@@ -41,7 +42,7 @@ fun DetailsScreen(
 
         Box(modifier = Modifier.fillMaxWidth().height(320.dp)) {
             AsyncImage(
-                model = url,
+                model = Constants.imageUrl(url),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop

@@ -53,6 +53,11 @@ kotlin {
             //implementation(libs.ksafe)
             //implementation(libs.ksafe.compose)
 
+
+            implementation(libs.media3.exoplayer)
+            implementation(libs.media3.ui)
+            implementation(libs.androidx.media3.exoplayer.hls)
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -105,6 +110,11 @@ kotlin {
 
             implementation(compose.foundation)
 
+            // media3
+            implementation(libs.media3.exoplayer)
+            implementation(libs.media3.ui)
+
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -112,13 +122,12 @@ kotlin {
 
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
         }
 
         wasmJsMain.dependencies {
             implementation(libs.navigation3.browser)
-
             implementation(libs.ktor.client.js)
-
         }
     }
 }

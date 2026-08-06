@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Catalog } from '../../service/catalog';
+import { environment } from '../home/home';
+import { Movie } from '../../model/movie';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +23,6 @@ export class Search implements OnInit {
   data: any[] = [];
 
   searchData: any[] = [];
-
 
   ngOnInit(): void {
     this.catalogService.yearTop5().subscribe({
@@ -67,6 +68,10 @@ export class Search implements OnInit {
         },
         error: err => console.log(err)
       });
+  }
+
+  getThumbnailUrl(movie: Movie): string {
+    return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
   }
 
 }

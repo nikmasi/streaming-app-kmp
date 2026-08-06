@@ -8,7 +8,6 @@
             (ngModelChange)="searchMovies($event)">
     </div>
 
-
     <!-- TRENDING -->
     <section *ngIf="query === ''">
 
@@ -16,29 +15,19 @@
 
         <div class="movies">
 
-            <div class="card"
-                 *ngFor="let movie of data"
-                 (click)="openMovie(movie)">
+            <div class="card" *ngFor="let movie of data" (click)="openMovie(movie)">
 
-                <img 
-                    [src]="movie.thumbnailUrl"
-                    [alt]="movie.title">
+                <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
 
                 <div class="movie-info">
-
                     <h3>{{ movie.title }}</h3>
-
                     <p>{{ movie.releaseYear }}</p>
-
                 </div>
 
             </div>
-
         </div>
 
     </section>
-
-
 
     <!-- SEARCH RESULTS -->
     <section *ngIf="query !== ''">
@@ -49,30 +38,17 @@
 
             @for (movie of searchData; track movie._id) {
 
-                <div class="card"
-                     (click)="openMovie(movie)">
-
-                    <img 
-                        [src]="movie.thumbnailUrl"
-                        [alt]="movie.title">
-
+                <div class="card" (click)="openMovie(movie)">
+                    <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
 
                     <div class="movie-info">
-
                         <h3>{{ movie.title }}</h3>
-
                         <p>{{ movie.releaseYear }}</p>
-
                         <p>{{ movie.description }}</p>
-
                     </div>
 
                 </div>
-
             }
-
         </div>
-
     </section>
-
 </div>

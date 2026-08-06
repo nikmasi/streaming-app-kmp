@@ -32,6 +32,9 @@ navigationCompose = "2.8.0-alpha02"
 lifecycleViewModel = "2.8.2"
 
 ksafe = "1.8.0"
+media3 = "1.10.1"
+ui = "1.11.4"
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -89,6 +92,14 @@ navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-co
 
 ksafe-compose = { module = "eu.anifantakis:ksafe-compose", version.ref = "ksafe" }
 ksafe = { module = "eu.anifantakis:ksafe", version.ref = "ksafe" }
+
+media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
+media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" }
+androidx-media3-exoplayer-hls = { module = "androidx.media3:media3-exoplayer-hls", version.ref = "media3" }
+
+
+androidx-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "ui" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
