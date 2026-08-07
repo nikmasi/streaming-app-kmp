@@ -24,6 +24,10 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+  cloud:
+    openfeign:
+      lazy-attributes-resolution: true
+
 application:
   security:
     jwt:

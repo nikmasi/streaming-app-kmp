@@ -19,26 +19,29 @@ import { AdminSettings } from './admin/admin-settings/admin-settings';
 import { AdminUsers } from './admin/admin-users/admin-users';
 import { EditProfile } from './pages/edit-profile/edit-profile';
 import { AdminUploadVideo } from './admin/admin-upload-video/admin-upload-video';
+import { adminAuthGuardGuard } from './guards/admin-auth-guard-guard';
+import { userGuard } from './guards/user-guard-guard';
+import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
-    {path:"", component:SignUp},
-    {path:"signIn", component:SignIn},
-    {path:"home", component:HomeComponent},
+    {path:"", component:SignUp, canActivate: [guestGuard]},
+    {path:"signIn", component:SignIn, canActivate: [guestGuard]},
+    {path:"home", component:HomeComponent, canActivate: [userGuard]},
     {path:"not-found", component:NotFound},
-    {path:"movie-details", component:MovieDetails},
-    {path:"search", component:Search},
-    {path:"my-list", component:MyList},
-    {path:"watch", component:Watch},
-    {path:"sign-up-password", component: SignUpPassword},
-    {path:"sign-up-name", component: SignUpName},
-    {path:"profile", component: Profile},
-    {path:"admin-panel", component: AdminPanel},
-    {path:"admin-movies", component: AdminMovies},
-    {path:"admin-analytics", component: AdminAnalytics},
-    {path:"admin-categories", component: AdminCategories},
-    {path:"admin-tvshows", component: AdminTvshows},
-    {path:"admin-settings", component: AdminSettings},
-    {path:"admin-users", component: AdminUsers},
-    {path:"edit-profile", component: EditProfile},
-    {path:"admin-upload-video", component: AdminUploadVideo},
+    {path:"movie-details", component:MovieDetails, canActivate: [userGuard]},
+    {path:"search", component:Search, canActivate: [userGuard]},
+    {path:"my-list", component:MyList, canActivate: [userGuard]},
+    {path:"watch", component:Watch, canActivate: [userGuard]},
+    {path:"sign-up-password", component: SignUpPassword, canActivate: [guestGuard]},
+    {path:"sign-up-name", component: SignUpName, canActivate: [guestGuard]},
+    {path:"profile", component: Profile, canActivate: [userGuard]},
+    {path:"admin-panel", component: AdminPanel, canActivate: [adminAuthGuardGuard]},
+    {path:"admin-movies", component: AdminMovies, canActivate: [adminAuthGuardGuard]},
+    {path:"admin-analytics", component: AdminAnalytics, canActivate: [adminAuthGuardGuard]},
+    {path:"admin-categories", component: AdminCategories, canActivate: [adminAuthGuardGuard]},
+    {path:"admin-tvshows", component: AdminTvshows, canActivate: [adminAuthGuardGuard]},
+    {path:"admin-settings", component: AdminSettings, canActivate: [adminAuthGuardGuard]},
+    {path:"admin-users", component: AdminUsers, canActivate: [adminAuthGuardGuard]},
+    {path:"edit-profile", component: EditProfile, canActivate: [userGuard]},
+    {path:"admin-upload-video", component: AdminUploadVideo, canActivate: [adminAuthGuardGuard]},
 ];

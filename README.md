@@ -1,12 +1,10 @@
 # Streaming Platform
 
-This project is a full-stack streaming platform built with Kotlin Multiplatform for the frontend and Spring Boot microservices architecture for the backend.
+This project is a full-stack streaming platform built with Kotlin Multiplatform and Angular for the frontend and Spring Boot microservices architecture for the backend.
 
 ---
 
 ## Project Status
-
-**Currently in active development**
 
 ### Implemented
 - Kotlin Multiplatform frontend (Android, TV)
@@ -22,9 +20,9 @@ This project is a full-stack streaming platform built with Kotlin Multiplatform 
 - Distributed tracing with Zipkin
 - PostgreSQL & MongoDB integration
 - Synchronous inter-service communication
+- Media playback system
 
 ### In Progress
-- Media playback system
 - Streaming session tracking
 - Event-driven communication between services
 - Resilience and fault-tolerance mechanisms
@@ -194,7 +192,6 @@ Manages user-specific saved content.
 Shared frontend implementation targeting:
 - Android
 - Android TV
-- Web
 
 Planned: 
 - iOS with Swift

@@ -1,6 +1,7 @@
 package com.streaming.spring_boot.catalog.service
 
 //import com.streaming.spring_boot.catalog.model.ListType
+import com.streaming.spring_boot.catalog.controller.MovieController
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -101,6 +102,15 @@ class MovieService(
 
     fun saveMovie(movie: Movie): Movie{
         return movieRepository.save(movie);
+    }
+
+    fun getInfo(): MovieController.CatalogInfoResponse {
+        val movie=movieRepository.findAll().size
+
+        return MovieController.CatalogInfoResponse(
+            movieNumber = movie,
+            tvShowNumber = 0
+        )
     }
 
 }

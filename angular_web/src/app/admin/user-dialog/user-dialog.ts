@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { 
   MAT_DIALOG_DATA, 
   MatDialogRef 
 } from '@angular/material/dialog';
 
 import { FormsModule } from '@angular/forms';
+import { Admin } from '../../service/admin';
 
 
 @Component({
@@ -16,14 +17,17 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './user-dialog.css'
 })
 export class UserDialog {
+
+  adminService = inject(Admin);
+
   user = {
     firstname: '',
     lastname: '',
+    password: '',
     email: '',
     role: 'USER',
     profileImage: ''
   };
-
 
   constructor(
     private dialogRef: MatDialogRef<UserDialog>,
@@ -35,6 +39,14 @@ export class UserDialog {
   }
 
   save(){
+    if(!this.data){
+      this.adminService.addUser(this.user).subscribe(response =>{
+      })
+    }
+    else{
+      this.adminService.editUser(this.user).subscribe(response =>{
+      })
+    }
     this.dialogRef.close(this.user);
   }
 

@@ -52,7 +52,7 @@
 
                 <td>
                     <button (click)="editUser(user)"> Edit </button>
-                    <button class="delete">
+                    <button class="delete" (click)="deleteUser(user.email)">
                         Delete
                     </button>
                 </td>

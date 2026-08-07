@@ -11,33 +11,28 @@
       <li routerLink="/admin-analytics" routerLinkActive="active">Analytics</li>
       <li routerLink="/admin-settings" routerLinkActive="active">Settings</li>
       <li routerLink="/admin-upload-video" routerLinkActive="active">Upload video</li>
+      <li (click)="logout()">Logout</li>
     </ul>
   </aside>
 
   <main class="content">
-
     <h1>Dashboard</h1>
 
     <div class="cards">
 
       <div class="card">
         <h3>Movies</h3>
-        <p>245</p>
+        <p>{{info.movieNumber}}</p>
       </div>
 
       <div class="card">
-        <h3>Series</h3>
-        <p>37</p>
+        <h3>TV Shows</h3>
+        <p>{{info.tvShowNumber}}</p>
       </div>
 
       <div class="card">
         <h3>Users</h3>
-        <p>12,542</p>
-      </div>
-
-      <div class="card">
-        <h3>Watch Hours</h3>
-        <p>53,812</p>
+        <p>{{info.userNumber}}</p>
       </div>
 
     </div>

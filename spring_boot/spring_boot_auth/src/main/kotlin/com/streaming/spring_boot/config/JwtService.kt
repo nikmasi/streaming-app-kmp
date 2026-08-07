@@ -33,8 +33,25 @@ class JwtService {
         return claimsResolver.apply(claims)
     }
 
+    /*
+        access_token will have sub, role, authorities, iat and exp;
+        example:
+        {
+          "sub": "admin@test.com",
+          "role": "ADMIN",
+          "authorities": ["ROLE_ADMIN"]  //for spring security @PreAuthorize("hasRole('ADMIN')")...
+          "iat": 1786107330,
+          "exp": 1786193730
+        }
+     */
     fun generateToken(userDetails: UserDetails): String {
-        return generateToken(HashMap(), userDetails)
+        val claims = mutableMapOf<String, Any>()
+
+        val user = userDetails as com.streaming.spring_boot.user.model.User
+        claims["role"] = user.role.name
+        claims["authorities"] = user.authorities.map { it.authority }
+
+        return generateToken(claims, userDetails)
     }
 
     fun generateToken(

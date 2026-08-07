@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
-import java.nio.file.Paths
-import java.util.UUID
 
 @RestController
 @RequestMapping("/api/v1/catalog")
@@ -25,6 +23,12 @@ class MovieController(
         val title: String,
         val email: String
     )
+
+    data class CatalogInfoResponse(
+        val movieNumber: Int,
+        val tvShowNumber: Int
+    )
+
 
 //    data class MyListRequest(
 //        val email: String,
@@ -131,5 +135,10 @@ class MovieController(
         movie = movie.copy(videoUrl = playback.streamUrl)
 
         return movieService.saveMovie(movie)
+    }
+
+    @GetMapping("/admin/info")
+    fun getInfo(): CatalogInfoResponse {
+        return movieService.getInfo()
     }
 }

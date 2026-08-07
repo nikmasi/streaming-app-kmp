@@ -1,22 +1,27 @@
-<h2>
-    {{data ? 'Edit User' : 'Add User'}}
-</h2>
+<div class="dialog">
+    <h2>
+        {{data ? 'Edit User' : 'Add User'}}
+    </h2>
 
+    <div class="form">
+        <input placeholder="Firstname" [(ngModel)]="user.firstname"/>
+        <input placeholder="Lastname" [(ngModel)]="user.lastname"/>
+        <input placeholder="Email" [(ngModel)]="user.email"/>
+        @if(!this.data){
+            <input placeholder="Password" [(ngModel)]="user.password"/>
+        }
+        
 
-<div class="form">
-    <input placeholder="Firstname" [(ngModel)]="user.firstname"/>
-    <input placeholder="Lastname" [(ngModel)]="user.lastname"/>
-    <input placeholder="Email" [(ngModel)]="user.email"/>
-    
-    <select [(ngModel)]="user.role">
-        <option value="USER">USER</option>
-        <option value="ADMIN">ADMIN</option>
-    </select>
+        <select [(ngModel)]="user.role">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
 
-    <input placeholder="Profile image" [(ngModel)]="user.profileImage"/>
-</div>
+        <input placeholder="Profile image" [(ngModel)]="user.profileImage"/>
+    </div>
 
-<div class="actions">
-    <button (click)="close()"> Cancel </button>
-    <button (click)="save()"> Save </button>
+    <div class="actions">
+        <button (click)="close()">Cancel</button>
+        <button (click)="save()">Save</button>
+    </div>
 </div>
