@@ -41,4 +41,7 @@ export class Profile implements OnInit{
     this.router.navigate(["/"]);
   }
 
+  watch_history(){
+    this.router.navigate(['/watch-history'])
+  }
 }

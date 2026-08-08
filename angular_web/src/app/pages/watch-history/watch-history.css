@@ -1,0 +1,244 @@
+.history {
+  min-height: 100vh;
+  padding: 40px 60px;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+/* HEADER */
+
+.history-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.history-header h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.history-header span {
+  color: #888;
+  font-size: 14px;
+}
+
+/* LIST */
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 900px;
+}
+
+/* ITEM */
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  padding: 18px;
+
+  background: #171717;
+  border: 1px solid #242424;
+  border-radius: 10px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.history-item:hover {
+  background: #202020;
+  border-color: #333;
+  transform: translateY(-2px);
+}
+
+/* MOVIE ICON */
+
+.movie-icon {
+  flex-shrink: 0;
+
+  width: 120px;
+  height: 75px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    135deg,
+    #252525,
+    #111
+  );
+
+  border-radius: 7px;
+
+  font-size: 30px;
+}
+
+/* INFO */
+
+.movie-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.movie-info h3 {
+  margin: 0 0 10px;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watch-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* PROGRESS */
+
+.progress {
+  width: 100%;
+  height: 5px;
+
+  margin: 12px 0;
+
+  background: #3a3a3a;
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+
+  background: #e50914;
+
+  border-radius: 10px;
+
+  transition: width 0.3s ease;
+}
+
+/* STATUS */
+
+.percentage {
+  color: #ddd;
+}
+
+.completed {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* DATE */
+
+.movie-info small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #777;
+  font-size: 12px;
+}
+
+/* EMPTY */
+
+.empty-history {
+  min-height: 400px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #888;
+}
+
+.empty-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.empty-history h3 {
+  margin: 0 0 8px;
+
+  color: #ddd;
+  font-size: 21px;
+}
+
+.empty-history p {
+  margin: 0;
+
+  color: #777;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+  .history {
+    padding: 25px 18px;
+  }
+
+  .history-header h2 {
+    font-size: 26px;
+  }
+
+  .history-item {
+    gap: 15px;
+    padding: 14px;
+  }
+
+  .movie-icon {
+    width: 85px;
+    height: 60px;
+    font-size: 24px;
+  }
+
+  .movie-info h3 {
+    font-size: 14px;
+  }
+
+  .watch-info {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .history {
+    padding: 20px 12px;
+  }
+
+  .history-item {
+    align-items: flex-start;
+  }
+
+  .movie-icon {
+    width: 65px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .history-header {
+    margin-bottom: 20px;
+  }
+
+  .history-header h2 {
+    font-size: 23px;
+  }
+}

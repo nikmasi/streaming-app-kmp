@@ -1,0 +1,22 @@
+<div class="dialog">
+    <h2>
+        {{data ? 'Edit Movie' : 'Add Movie'}}
+    </h2>
+
+    <div class="form">
+        <input placeholder="title" [(ngModel)]="movie.title"/>
+        <input placeholder="description" [(ngModel)]="movie.description"/>
+        <input placeholder="genres" [(ngModel)]="movie.genres"/>
+    
+        <input placeholder="duration" [(ngModel)]="movie.duration"/>
+        <input placeholder="releaseYear" [(ngModel)]="movie.releaseYear"/>
+        <p>{{movie.thumbnailUrl}}</p>
+        <p>{{movie.videoUrl}}</p>
+
+    </div>
+
+    <div class="actions">
+        <button (click)="close()">Cancel</button>
+        <button (click)="save()">Save</button>
+    </div>
+</div>

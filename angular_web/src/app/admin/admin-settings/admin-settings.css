@@ -174,3 +174,78 @@ td button:hover{
         overflow-x:auto;
     }
 }
+
+.settings-page {
+  padding: 30px;
+  color: #fff;
+}
+
+.subtitle {
+  color: #999;
+  margin-bottom: 30px;
+}
+
+.settings-card {
+  background: #1b1b1b;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.settings-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  color: #ccc;
+}
+
+input,
+select {
+  background: #252525;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 10px;
+  color: white;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #333;
+}
+
+.setting-row p {
+  margin: 5px 0 0;
+  color: #888;
+}
+
+.setting-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.save-button {
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.save-button:hover {
+  background: #b20710;
+}

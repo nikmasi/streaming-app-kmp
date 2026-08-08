@@ -148,27 +148,21 @@ td button:hover{
 }
 
 @media(max-width:1000px){
-
     .cards{
         grid-template-columns:repeat(2,1fr);
     }
-
 }
 
 @media(max-width:700px){
-
     .admin-layout{
         flex-direction:column;
     }
-
     .sidebar{
         width:100%;
     }
-
     .cards{
         grid-template-columns:1fr;
     }
-
     table{
         display:block;
         overflow-x:auto;

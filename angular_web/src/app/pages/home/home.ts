@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common'; // Obavezno uvezi ovo
 import { Catalog } from '../../service/catalog';
 import { Router } from '@angular/router';
 import { Movie } from '../../model/movie';
+import { Playback, WatchProgress } from '../../service/playback';
 
 export const environment = {
   apiUrl: 'http://localhost:8222'
 };
-
 
 @Component({
   selector: 'app-home',
@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
 
   data: any ={}
 
+  private playbackService = inject(Playback);
+  history: WatchProgress[] = [];
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (window.scrollY > 50) {
@@ -35,8 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.catalogService.home()
-    .subscribe({
+    this.catalogService.home().subscribe({
       next: res => {
         console.log(res);
         this.data = res;
@@ -45,7 +47,16 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     });
-}
+
+    this.playbackService.getHistory().subscribe({
+      next: data => {
+        this.history = data;
+      },
+      error: err => {
+        console.error('Failed to load history', err);
+      }
+    });
+  }
 
 
   getGenres(): string[] {
@@ -71,6 +82,15 @@ export class HomeComponent implements OnInit {
 
   getThumbnailUrl(movie: Movie): string {
     return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
+  }
+
+  continueWatching(watch: WatchProgress){
+    // this.router.navigate(
+    //   ['/movie-details', movie.id],
+    //   {
+    //     state: { movie }
+    //   }
+    // );
   }
 
 

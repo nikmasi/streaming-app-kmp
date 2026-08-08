@@ -1,6 +1,7 @@
 package com.streaming.spring_boot.catalog.service
 
 //import com.streaming.spring_boot.catalog.model.ListType
+import com.streaming.spring_boot.catalog.controller.AdminController
 import com.streaming.spring_boot.catalog.controller.MovieController
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -17,6 +18,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.UUID
+import kotlin.String
 
 @Service
 class MovieService(
@@ -113,4 +115,104 @@ class MovieService(
         )
     }
 
+    // admin
+
+    fun getAllMovies(): List<AdminController.MovieResponse> {
+        return movieRepository.findAll()
+            .map { movie ->
+                AdminController.MovieResponse(
+                    title = movie.title,
+                    description = movie.description,
+                    genres = movie.genres,
+                    duration = movie.duration,
+                    releaseYear = movie.releaseYear,
+                    thumbnailUrl = movie.thumbnailUrl,
+                    videoUrl = movie.videoUrl,
+                    id = movie.id?.toHexString() ?: ""
+                )
+            }
+    }
+
+    fun editMovie(request: AdminController.MovieResponse): AdminController.MovieResponse {
+
+        val objectId = ObjectId(request.id)
+        val movie = movieRepository.findById(objectId).orElse(null)
+
+        val updatedMovie = movie.copy(
+            title = request.title,
+            description = request.description,
+            genres = request.genres,
+            duration = request.duration,
+            releaseYear = request.releaseYear,
+            thumbnailUrl = request.thumbnailUrl,
+            videoUrl = request.videoUrl
+        )
+
+        movieRepository.save(updatedMovie)
+
+        return AdminController.MovieResponse(
+            title = request.title,
+            description = request.description,
+            genres = request.genres,
+            duration = request.duration,
+            releaseYear = request.releaseYear,
+            thumbnailUrl = request.thumbnailUrl,
+            videoUrl = request.videoUrl,
+            id = updatedMovie.id?.toHexString() ?: ""
+        )
+
+    }
+
+    fun deleteMovie(id: String) {
+        val objectId = ObjectId(id)
+        val movie = movieRepository.findById(objectId).orElse(null)
+        movieRepository.delete(movie)
+    }
+
+    fun getCategories(): List<AdminController.CategoryResponse> {
+
+        return movieRepository.findAll()
+            .flatMap { movie -> movie.genres }
+            .groupingBy { it }
+            .eachCount()
+            .map { (genre, count) ->
+                AdminController.CategoryResponse(
+                    name = genre,
+                    movieCount = count.toLong()
+                )
+            }
+            .sortedBy { it.name }
+    }
+
+    fun getAnalytics(): AdminController.AnalyticsResponse {
+        val movies = movieRepository.findAll()
+        val totalMovies = movies.size.toLong()
+
+        val genres = movies.flatMap { it.genres }.distinct()
+
+        val averageDuration = if (movies.isNotEmpty()) {
+            movies.map { it.duration }.average()
+        } else {
+            0.0
+        }
+
+        val moviesByGenre = movies
+            .flatMap { movie -> movie.genres.map { genre -> genre } }
+            .groupingBy { it }
+            .eachCount()
+            .map { (genre, count) ->
+                AdminController.GenreAnalytics(
+                    name = genre,
+                    movieCount = count.toLong()
+                )
+            }
+            .sortedByDescending { it.movieCount }
+
+        return AdminController.AnalyticsResponse(
+            totalMovies = totalMovies,
+            totalGenres = genres.size.toLong(),
+            averageDuration = averageDuration,
+            moviesByGenre = moviesByGenre
+        )
+    }
 }

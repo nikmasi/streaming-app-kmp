@@ -97,48 +97,4 @@ class MovieController(
 //        return movieService.removeFromMyList(request.email, request.movieId, request.type)
 //    }
 
-
-    @PostMapping("/admin/movie")
-    fun uploadMovie(
-        @RequestParam title: String,
-        @RequestParam description: String,
-        @RequestParam genres: String,
-        @RequestParam duration: Int,
-        @RequestParam releaseYear: Int,
-        @RequestParam thumbnail: MultipartFile,
-        @RequestParam video: MultipartFile
-    ): Movie {
-        // save thumbnail
-        val thumbnailPath = movieService.saveFile(thumbnail, "storage/thumbnails")
-
-        // save database
-        var movie = Movie(
-            title = title,
-            description = description,
-            genres = genres.split(","),
-            duration = duration,
-            releaseYear = releaseYear,
-            thumbnailUrl = thumbnailPath.toString(),
-            videoUrl = ""
-        )
-
-
-
-        movie  = movieService.saveMovie(movie);
-
-        val playback =
-            playbackClient.uploadVideo(
-                movie.id!!.toHexString(),
-                video
-            )
-
-        movie = movie.copy(videoUrl = playback.streamUrl)
-
-        return movieService.saveMovie(movie)
-    }
-
-    @GetMapping("/admin/info")
-    fun getInfo(): CatalogInfoResponse {
-        return movieService.getInfo()
-    }
 }

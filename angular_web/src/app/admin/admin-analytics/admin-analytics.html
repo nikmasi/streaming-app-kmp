@@ -17,6 +17,41 @@
 
     <h1>Admin Analytics</h1>
 
+    <div *ngIf="analytics" class="stats-grid">
+
+    <div class="stat-card">
+      <span class="stat-label">Total Movies</span>
+      <span class="stat-value">{{ analytics.totalMovies }}</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Total Genres</span>
+      <span class="stat-value">{{ analytics.totalGenres }}</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Average Duration</span>
+      <span class="stat-value">{{ analytics.averageDuration | number:'1.0-0' }} min</span>
+    </div>
+
+    </div>
+
+
+  <div *ngIf="analytics" class="genre-section">
+    <h2>Movies by Genre</h2>
+
+    <div class="genre-row" *ngFor="let genre of analytics.moviesByGenre">
+
+      <div class="genre-info">
+        <span>{{ genre.name }}</span>
+        <span>{{ genre.movieCount }}</span>
+      </div>
+
+      <div class="bar-background">
+        <div class="bar" [style.width.%]="(genre.movieCount / analytics.totalMovies) * 100"></div>
+      </div>
+    </div>
+  </div>
     
   </main>
 </div>

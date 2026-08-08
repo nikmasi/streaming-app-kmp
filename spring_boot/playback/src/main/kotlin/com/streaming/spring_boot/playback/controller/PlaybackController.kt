@@ -1,9 +1,15 @@
 package com.streaming.spring_boot.playback.controller
 
+import com.streaming.spring_boot.playback.dto.UpdateWatchProgressRequest
+import com.streaming.spring_boot.playback.dto.WatchProgressResponse
 import com.streaming.spring_boot.playback.service.PlaybackService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -52,4 +58,36 @@ public class PlaybackController(
         )
     }
 
+
+    // watch
+
+    @PutMapping("/progress")
+    fun updateProgress(
+        @RequestHeader("X-User-Email") email: String,
+        @RequestBody request: UpdateWatchProgressRequest
+    ): WatchProgressResponse {
+        return playbackService.updateProgress(email, request)
+    }
+
+    @GetMapping("/progress/{movieId}")
+    fun getProgress(
+        @RequestHeader("X-User-Email") email: String,
+        @PathVariable movieId: String
+    ): WatchProgressResponse? {
+        return playbackService.getProgress(email, movieId)
+    }
+
+    @GetMapping("/continue-watching")
+    fun continueWatching(
+        @RequestHeader("X-User-Email") email: String
+    ): List<WatchProgressResponse> {
+        return playbackService.getContinueWatching(email)
+    }
+
+    @GetMapping("/history")
+    fun history(
+        @RequestHeader("X-User-Email") email: String
+    ): List<WatchProgressResponse> {
+        return playbackService.getHistory(email)
+    }
 }

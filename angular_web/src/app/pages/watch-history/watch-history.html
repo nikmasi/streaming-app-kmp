@@ -1,0 +1,65 @@
+<section class="history">
+
+  <div class="history-header">
+    <h2>Watch History</h2>
+    <span>{{ history.length }} movies</span>
+  </div>
+
+  <div class="history-list" *ngIf="history.length > 0">
+
+    <article class="history-item" *ngFor="let item of history">
+
+      <div class="movie-icon">🎬</div>
+
+      <div class="movie-info">
+
+        <h3>{{ item.movieId }}</h3>
+
+        <div class="watch-info">
+          <span>
+            {{ item.positionSeconds }} / {{ item.durationSeconds }} min
+          </span>
+
+          <span *ngIf="item.completed" class="completed">
+            ✓ Completed
+          </span>
+
+          <span
+            *ngIf="!item.completed && item.durationSeconds > 0"
+            class="percentage"
+          >
+            {{ (item.positionSeconds / item.durationSeconds * 100) | number:'1.0-0' }}%
+          </span>
+        </div>
+
+        <div
+          class="progress"
+          *ngIf="item.durationSeconds > 0"
+        >
+          <div
+            class="progress-fill"
+            [style.width.%]="
+              item.positionSeconds / item.durationSeconds * 100
+            "
+          ></div>
+        </div>
+
+        <small>
+          Last watched: {{ item.lastWatchedAt | date:'medium' }}
+        </small>
+
+      </div>
+
+    </article>
+
+  </div>
+
+  <div class="empty-history" *ngIf="history.length === 0">
+    <div>
+      <div class="empty-icon">🎬</div>
+      <h3>No watch history yet</h3>
+      <p>Movies you watch will appear here.</p>
+    </div>
+  </div>
+
+</section>

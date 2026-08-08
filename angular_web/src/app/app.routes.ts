@@ -22,6 +22,7 @@ import { AdminUploadVideo } from './admin/admin-upload-video/admin-upload-video'
 import { adminAuthGuardGuard } from './guards/admin-auth-guard-guard';
 import { userGuard } from './guards/user-guard-guard';
 import { guestGuard } from './guards/guest-guard';
+import { WatchHistory } from './pages/watch-history/watch-history';
 
 export const routes: Routes = [
     {path:"", component:SignUp, canActivate: [guestGuard]},
@@ -44,4 +45,5 @@ export const routes: Routes = [
     {path:"admin-users", component: AdminUsers, canActivate: [adminAuthGuardGuard]},
     {path:"edit-profile", component: EditProfile, canActivate: [userGuard]},
     {path:"admin-upload-video", component: AdminUploadVideo, canActivate: [adminAuthGuardGuard]},
+    {path:"watch-history", component: WatchHistory, canActivate: [userGuard]},
 ];

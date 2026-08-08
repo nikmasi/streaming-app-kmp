@@ -40,15 +40,27 @@
   <!-- Sekcije sa filmovima (Redovi) -->
   <main class="content-rows">
 
+  <section class="row-section">
+    <h2>Continue watching</h2>
+    <div class="row-slider">
+      <div class="card" *ngFor="let watch of history" (click)="continueWatching(watch)">
+          <!--<img [src]="getThumbnailUrl(movie)" [alt]="movie.title">-->
+          <div class="card-content">
+            <h3>{{ watch.movieId }}</h3>
+              <!--<h3>{{ movie.title }}</h3>
+              <p>{{ movie.releaseYear }}</p>-->
+          </div>
+      </div>
+    </div>
+  </section>
+
   <section class="row-section" *ngFor="let genre of getGenres()">
 
     <h2>{{ genre }}</h2>
 
     <div class="row-slider">
 
-      <div class="card"
-          *ngFor="let movie of data[genre]"
-          (click)="openMovie(movie)">
+      <div class="card" *ngFor="let movie of data[genre]" (click)="openMovie(movie)">
 
           <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
 

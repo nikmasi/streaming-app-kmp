@@ -44,4 +44,40 @@ export class Admin {
     return this.http.get<Info>(`${this.pathUser}/info`)
   }
 
+
+  // movies
+
+  getAllMovies(){
+    return this.http.get<any>(
+      `${this.path}/movies`
+    );
+  }
+
+  editMovie(data:any){
+    return this.http.post<any>(
+      `${this.path}/edit-movie`, data
+    );
+  }
+
+  deleteMovie(id: string){
+    return this.http.delete(
+      `${this.path}/delete-movie`,
+      {
+        body: { id: id }
+      }
+    );
+  }
+
+  getCategories(){
+    return this.http.get<any>(
+      `${this.path}/categories`
+    );
+  }
+
+  getAnalytics(){
+    return this.http.get<any>(
+      `${this.path}/analytics`
+    );
+  }
+
 }

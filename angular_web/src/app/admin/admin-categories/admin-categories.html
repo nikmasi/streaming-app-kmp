@@ -17,6 +17,20 @@
 
     <h1>Admin Categories</h1>
 
-    
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories">
+                <td>{{ category.name }} </td>
+                <td> {{ category.movieCount }} movies</td>
+            </tr>
+        </tbody>
+    </table>
+
   </main>
 </div>
