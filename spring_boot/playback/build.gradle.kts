@@ -39,6 +39,11 @@ dependencies {
 
 	//mongo db
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+
+	//openfeign
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
 
 dependencyManagement {

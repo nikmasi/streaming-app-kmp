@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { Playback, WatchProgress } from '../../service/playback';
+import { MovieResponse, Playback, WatchProgress } from '../../service/playback';
+import { environment } from '../home/home';
 
 @Component({
   selector: 'app-watch-history',
@@ -24,4 +25,8 @@ export class WatchHistory implements OnInit {
         }
       });
   }
+
+  getThumbnailUrlForWatch(movie: MovieResponse): string {
+      return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
+    }
 }

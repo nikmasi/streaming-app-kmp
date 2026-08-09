@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'; // Obavezno uvezi ovo
 import { Catalog } from '../../service/catalog';
 import { Router } from '@angular/router';
 import { Movie } from '../../model/movie';
-import { Playback, WatchProgress } from '../../service/playback';
+import { MovieResponse, Playback, WatchProgress } from '../../service/playback';
 
 export const environment = {
   apiUrl: 'http://localhost:8222'
@@ -64,6 +64,8 @@ export class HomeComponent implements OnInit {
   }
 
   openMovie(movie: any) {
+
+    console.log('Movie je ', movie);
     this.router.navigate(
       ['/movie-details', movie.id],
       {
@@ -71,6 +73,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
 
   search(){
     this.router.navigate(['/search'])
@@ -84,13 +87,17 @@ export class HomeComponent implements OnInit {
     return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
   }
 
+  getThumbnailUrlForWatch(movie: MovieResponse): string {
+    return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
+  }
+
   continueWatching(watch: WatchProgress){
-    // this.router.navigate(
-    //   ['/movie-details', movie.id],
-    //   {
-    //     state: { movie }
-    //   }
-    // );
+    this.router.navigate(
+      ['/movie-details', watch.movie.id],
+      {
+        state: { watch }
+      }
+    );
   }
 
 

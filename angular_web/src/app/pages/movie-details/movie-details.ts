@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Movie } from '../../model/movie';
-import { environment } from '../home/home';
 import { Router } from '@angular/router';
+
+import { environment } from '../home/home';
+import { MovieResponse, WatchProgress } from '../../service/playback';
 
 @Component({
   selector: 'app-movie-details',
@@ -14,17 +15,27 @@ export class MovieDetails {
 
   router = inject(Router);
 
-  movie = history.state.movie;
+  movie: MovieResponse;
+  watchProgress?: WatchProgress;
 
-  getThumbnailUrl(movie: Movie): string {
+  constructor() {
+    this.watchProgress = history.state.watch;
+
+    this.movie = history.state.movie ?? this.watchProgress?.movie;
+  }
+
+  getThumbnailUrl(movie: MovieResponse): string {
     return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
   }
 
-  playMovie(movie: any) {
+  playMovie(movie: MovieResponse) {
     this.router.navigate(
       ['/watch'],
       {
-        state: { movie }
+        state: {
+          movie,
+          watchProgress: this.watchProgress
+        }
       }
     );
   }

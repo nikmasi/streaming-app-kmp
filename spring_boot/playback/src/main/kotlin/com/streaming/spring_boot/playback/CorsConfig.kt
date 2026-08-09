@@ -18,6 +18,9 @@ class CorsConfig {
         config.allowedMethods = listOf(
             "GET",
             "POST",
+            "OPTIONS",
+            "PUT",
+            "DELETE",
             "OPTIONS"
         )
 

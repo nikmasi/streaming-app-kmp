@@ -45,8 +45,20 @@ class MovieService(
         return movies
     }
 
-    fun getHomeData(genre: String):List<Movie>{
+    fun getHomeData(genre: String):List<MovieController.MovieResponse>{
         return movieRepository.findTop10ByGenres(genre)
+            .map { movie ->
+                MovieController.MovieResponse(
+                    id = movie.id?.toHexString() ?: "",
+                    title = movie.title,
+                    description = movie.description,
+                    genres = movie.genres,
+                    duration = movie.duration,
+                    releaseYear = movie.releaseYear,
+                    thumbnailUrl = movie.thumbnailUrl,
+                    videoUrl = movie.videoUrl
+                )
+            }
     }
 
     fun allGenres():List<List<String>>{
@@ -214,5 +226,17 @@ class MovieService(
             averageDuration = averageDuration,
             moviesByGenre = moviesByGenre
         )
+    }
+
+    fun getMovieById(id: String): Movie? {
+        if (!ObjectId.isValid(id)) {
+            return null
+        }
+        return movieRepository.findById(ObjectId(id)).orElse(null)
+    }
+
+    fun getMoviesByIds(ids: List<String>): List<Movie> {
+        val objectIds = ids.filter { ObjectId.isValid(it) }.map { ObjectId(it) }
+        return movieRepository.findAllById(objectIds)
     }
 }

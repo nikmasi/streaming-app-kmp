@@ -5,6 +5,7 @@ import com.streaming.spring_boot.catalog.model.Movie
 import com.streaming.spring_boot.catalog.service.MovieService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -28,6 +29,30 @@ class MovieController(
         val movieNumber: Int,
         val tvShowNumber: Int
     )
+
+    data class MovieResponse(
+        val id: String,
+        val title: String,
+        val description: String,
+        val genres: List<String>,
+        val duration: Int,
+        val releaseYear: Int,
+        val thumbnailUrl: String,
+        val videoUrl: String
+    )
+
+
+    private fun Movie.toResponse() =
+        MovieResponse(
+            id = id?.toHexString() ?: "",
+            title = title,
+            description = description,
+            genres = genres,
+            duration = duration,
+            releaseYear = releaseYear,
+            thumbnailUrl = thumbnailUrl,
+            videoUrl = videoUrl
+        )
 
 
 //    data class MyListRequest(
@@ -64,7 +89,7 @@ class MovieController(
     }
 
     @GetMapping("/home")
-    fun getHomeData(): Map<String, List<Movie>> {
+    fun getHomeData(): Map<String, List<MovieResponse>> {
         val genres =
             listOf("Drama", "Romance", "Action", "Sci-Fi","Thriller", "Crime", "Adventure", "Music",
                 "Comedy", "History", "Mystery", "Sport", "War", "Fantasy", "Animation")
@@ -74,6 +99,16 @@ class MovieController(
         return genres.associateWith { genre ->
             movieService.getHomeData(genre)
         }
+    }
+
+    @GetMapping("/movie/{id}")
+    fun getMovieById(@PathVariable id: String): MovieResponse? {
+        return movieService.getMovieById(id)?.toResponse()
+    }
+
+    @GetMapping("/movies/by-ids")
+    fun getMoviesByIds(@RequestParam ids: List<String>): List<MovieResponse> {
+        return movieService.getMoviesByIds(ids).map { it.toResponse() }
     }
 
 //    @PostMapping("/my-list")

@@ -29,6 +29,7 @@ export const routes: Routes = [
     {path:"signIn", component:SignIn, canActivate: [guestGuard]},
     {path:"home", component:HomeComponent, canActivate: [userGuard]},
     {path:"not-found", component:NotFound},
+    {path:"movie-details/:id", component:MovieDetails, canActivate: [userGuard]},
     {path:"movie-details", component:MovieDetails, canActivate: [userGuard]},
     {path:"search", component:Search, canActivate: [userGuard]},
     {path:"my-list", component:MyList, canActivate: [userGuard]},

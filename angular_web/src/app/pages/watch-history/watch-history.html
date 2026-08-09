@@ -9,11 +9,13 @@
 
     <article class="history-item" *ngFor="let item of history">
 
-      <div class="movie-icon">🎬</div>
+      <div class="movie-icon">
+        <img [src]="getThumbnailUrlForWatch(item.movie)" [alt]="item.movie.title" class="movie-image">
+      </div>
 
       <div class="movie-info">
 
-        <h3>{{ item.movieId }}</h3>
+        <h3>{{ item.movie.title }}</h3>
 
         <div class="watch-info">
           <span>
