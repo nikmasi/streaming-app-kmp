@@ -41,7 +41,10 @@ This project is a full-stack streaming platform built with Kotlin Multiplatform 
 ```mermaid
 flowchart LR
 
-    CLIENT[Clients]
+    ANDROID[KMP Android]
+    TV[KMP Android TV]
+    WEB[Angular Web]
+
     GATEWAY[API Gateway]
 
     AUTH[Auth Service]
@@ -54,12 +57,15 @@ flowchart LR
     M1[(MongoDB)]
     M2[(MongoDB)]
     M3[(Search Index)]
+    M4[(MongoDB)]
 
     EUREKA[Eureka]
     CONFIG[Config Server]
     ZIPKIN[Zipkin]
 
-    CLIENT --> GATEWAY
+    ANDROID --> GATEWAY
+    TV --> GATEWAY
+    WEB --> GATEWAY
 
     GATEWAY --> AUTH
     GATEWAY --> CATALOG
@@ -71,6 +77,7 @@ flowchart LR
     CATALOG --> M1
     FAV --> M2
     SEARCH --> M3
+    PLAYBACK --> M4
 
     CATALOG <-- REST --> FAV
     PLAYBACK <-- REST --> CATALOG

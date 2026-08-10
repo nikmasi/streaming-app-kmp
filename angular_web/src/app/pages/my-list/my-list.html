@@ -1,19 +1,79 @@
-<div class="my-list">
+<div class="profile-page">
+  <header class="navbar">
+    <div class="logo">NETFLIX</div>
 
+    <nav class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/tv-shows">TV Shows</a>
+      <a routerLink="/movies">Movies</a>
+      <a routerLink="/my-list" class="active">My List</a>
+    </nav>
+
+    <div class="nav-right">
+      <span class="profile-name">My Profile</span>
+    </div>
+  </header>
+
+  <main class="content">
     <h1>My List</h1>
 
-    <div class="movies">
+    <p class="subtitle">Movies and shows you've saved</p>
+    <div class="loading" *ngIf="isLoading">Loading...</div>
 
-        <div class="card" *ngFor="let i of [1,2,3,4,5,6]">
+    <!-- LIKED -->
+    <section class="content-section" *ngIf="!isLoading">
+      <div class="section-header">
+        <h2> Liked</h2>
+        <span>{{ likedMovies.length }}</span>
+      </div>
 
-            <img src="https://picsum.photos/300/170?random={{i}}">
 
-            <h3>Movie {{i}}</h3>
+      <!-- LIKED MOVIES -->
+      <div class="movie-row" *ngIf="likedMovies.length > 0">
 
-            <button>Remove</button>
+       <div class="movie-card" *ngFor="let movie of likedMovies">
 
+        <img [src]="getThumbnailUrlForWatch(movie)" [alt]="movie.title"/>
+
+          <div class="movie-overlay">
+
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.description }}</p>
+
+            <div class="actions">
+              <button class="play-button" > ▶ </button>
+              <button class="remove-button" > ✕</button>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-    </div>
 
+    <!-- WATCH LATER -->
+    <section class="content-section" *ngIf="!isLoading">
+
+      <div class="section-header">
+        <h2>Watch Later</h2>
+        <span>{{ watchLaterMovies.length }}</span>
+      </div>
+
+
+      <!-- WATCH LATER MOVIES -->
+      <div class="movie-row" *ngIf="watchLaterMovies.length > 0">
+        <div class="movie-card" *ngFor="let movie of watchLaterMovies">
+
+          <img [src]="getThumbnailUrlForWatch(movie)" [alt]="movie.title"/>
+
+          <div class="movie-overlay">
+            <h3>{{ movie.title }}</h3>
+            <div class="actions">
+              <button class="play-button" >▶</button>
+              <button class="remove-button">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>

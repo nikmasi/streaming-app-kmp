@@ -1,55 +1,360 @@
-.my-list{
-
-    background:#141414;
-
-    color:white;
-
-    min-height:100vh;
-
-    padding:100px 60px;
+.profile-page {
+  min-height: 100vh;
+  background: #0b0b0b;
+  color: #fff;
 }
 
-.movies{
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-    display:grid;
+  height: 70px;
 
-    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  display: flex;
+  align-items: center;
 
-    gap:25px;
+  padding: 0 4%;
 
-    margin-top:40px;
+  background: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 70%,
+    transparent 100%
+  );
 }
 
-.card{
+.logo {
+  color: #e50914;
 
-    background:#222;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -1px;
 
-    border-radius:8px;
-
-    overflow:hidden;
+  margin-right: 40px;
 }
 
-.card img{
-
-    width:100%;
+.nav-links {
+  display: flex;
+  gap: 25px;
 }
 
-.card h3{
+.nav-links a {
+  color: #d5d5d5;
 
-    padding:15px;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: color 0.2s;
 }
 
-.card button{
+.nav-links a:hover {
+  color: #fff;
+}
 
-    width:100%;
+.nav-links a.active {
+  color: #fff;
+  font-weight: 700;
+}
 
-    height:45px;
+.nav-right {
+  margin-left: auto;
+}
 
-    border:none;
+.profile-name {
+  color: #ddd;
+  font-size: 14px;
+}
 
-    background:#E50914;
 
-    color:white;
+/* =========================
+   CONTENT
+========================= */
 
-    cursor:pointer;
+.content {
+  padding: 35px 4% 80px;
+}
+
+.content h1 {
+  font-size: 34px;
+  margin: 0;
+}
+
+.subtitle {
+  color: #888;
+  margin-top: 8px;
+  margin-bottom: 45px;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.content-section {
+  margin-bottom: 55px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.section-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+}
+
+.section-header span {
+  color: #888;
+  font-size: 14px;
+}
+
+
+/* =========================
+   MOVIE ROW
+========================= */
+
+.movie-row {
+  display: flex;
+
+  gap: 14px;
+
+  overflow-x: auto;
+
+  padding-bottom: 10px;
+
+  scrollbar-width: none;
+}
+
+.movie-row::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.movie-card {
+  position: relative;
+
+  flex: 0 0 180px;
+
+  height: 270px;
+
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  background: #181818;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.07);
+
+  z-index: 10;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.movie-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 40px 12px 12px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95),
+    rgba(0, 0, 0, 0.7),
+    transparent
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.2s;
+}
+
+.movie-card:hover .movie-overlay {
+  opacity: 1;
+}
+
+.movie-overlay h3 {
+  margin: 0 0 10px;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s;
+}
+
+.actions button:hover {
+  transform: scale(1.1);
+}
+
+.play-button {
+  background: #fff;
+  color: #000;
+}
+
+.remove-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 1px solid #222;
+
+  border-radius: 8px;
+
+  background: #111;
+}
+
+.empty-icon {
+  font-size: 38px;
+
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.empty-state p {
+  color: #777;
+
+  margin-top: 8px;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+  min-height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #888;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .logo {
+    margin-right: 20px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  .nav-right {
+    display: none;
+  }
+
+  .content {
+    padding: 25px 20px 60px;
+  }
+
+  .content h1 {
+    font-size: 28px;
+  }
+
+  .movie-card {
+    flex-basis: 140px;
+    height: 210px;
+  }
 }

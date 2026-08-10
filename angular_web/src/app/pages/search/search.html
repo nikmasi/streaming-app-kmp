@@ -1,4 +1,18 @@
 <div class="search-page">
+    <!-- Navigacioni meni -->
+  <header class="navbar" [ngClass]="{'scrolled': isScrolled}">
+    <div class="nav-left">
+      <div class="logo">NETFLIX</div>
+      <nav class="nav-links">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+        <a href="#">TV Shows</a>
+        <a href="#">Movies</a>
+        <a href="my-list">My List</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+    </div>
+  </header>
 
     <div class="search-bar">
         <input

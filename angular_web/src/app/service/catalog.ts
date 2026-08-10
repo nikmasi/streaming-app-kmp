@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MovieResponse } from './playback';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,12 @@ export class Catalog {
   search(query:string){
     return this.http.get(
       `${this.path}/search?title=${query}&email=${'aa'}`
+    );
+  }
+
+  getMovie(id:string){
+    return this.http.get<MovieResponse>(
+      `${this.path}/movie/${id}`
     );
   }
 

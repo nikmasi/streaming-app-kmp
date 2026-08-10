@@ -1,12 +1,11 @@
 <div class="movie-details" *ngIf="movie">
 
     <section class="hero"
-        [style.background-image]="'linear-gradient(to right, rgba(20,20,20,.95) 20%, rgba(20,20,20,.5) 60%, rgba(20,20,20,.9)), url(' + movie.thumbnailUrl + ')'">
+        [style.background-image]="'linear-gradient(to right, rgba(20,20,20,.95) 20%, rgba(20,20,20,.5) 60%, rgba(20,20,20,.9)), 
+        url(' + movie.thumbnailUrl + ')'">
 
         <div class="content">
-
             <span class="netflix-tag">NETFLIX</span>
-
             <h1>{{ movie.title }}</h1>
 
             <div class="meta">
@@ -15,30 +14,19 @@
                 <span>HD</span>
             </div>
 
-            <p class="description">
-                {{ movie.description }}
-            </p>
+            <p class="description"> {{ movie.description }} </p>
 
             <div class="genres">
-                <span
-                    class="genre"
-                    *ngFor="let genre of movie.genres">
-                    {{ genre }}
-                </span>
+                <span class="genre" *ngFor="let genre of movie.genres"> {{ genre }} </span>
             </div>
 
             <div class="buttons">
-                <button
-                    class="play"
-                    (click)="playMovie(movie)">
-                    ▶ Play
-                </button>
+                <button class="play" (click)="playMovie(movie)"> ▶ Play </button>
 
-                <button class="my-list">
-                    ＋ My List
-                </button>
+                <button class="action-button" [class.active]="isLiked" (click)="toggleLike()">❤️</button>
+                <button class="action-button" [class.active]="isDisliked" (click)="toggleDislike()">👎</button>
+                <button class="action-button" [class.active]="isWatchLater" (click)="toggleWatchLater()">🔖</button>
             </div>
-
         </div>
 
     </section>
@@ -46,9 +34,7 @@
     <section class="details">
 
         <div class="poster">
-            <img
-                [src]="getThumbnailUrl(movie)"
-                [alt]="movie.title">
+            <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
         </div>
 
         <div class="info">

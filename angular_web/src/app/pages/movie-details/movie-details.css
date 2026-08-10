@@ -137,3 +137,33 @@ button{
     color:#888;
     margin-bottom:10px;
 }
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.action-button {
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid #555;
+  border-radius: 50%;
+
+  background: #222;
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.action-button:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+.action-button.active {
+  background: white;
+  color: black;
+  border-color: white;
+}
