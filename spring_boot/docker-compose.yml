@@ -135,15 +135,20 @@ services:
       discovery:
         condition: service_healthy
 
-  playback:
+  playback-1:
     build:
       context: ./playback
       dockerfile: Dockerfile
-    container_name: playback
+    container_name: playback-1
+    environment:
+      INSTANCE_ID: playback-1
+      INSTANCE_HOST: playback-1
+      INSTANCE_PORT: 8080
+      STREAMING_CAPACITY: 100
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
-      - ./playback/storage:/app/storage
+      - ./playback/storage-1:/app/storage
     networks:
       - streaming-network
     depends_on:
@@ -156,6 +161,58 @@ services:
       discovery:
         condition: service_healthy
 
+  playback-2:
+    build:
+      context: ./playback
+      dockerfile: Dockerfile
+    container_name: playback-2
+
+    environment:
+      INSTANCE_ID: playback-2
+      INSTANCE_HOST: playback-2
+      INSTANCE_PORT: 8080
+      STREAMING_CAPACITY: 100
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./playback/storage-2:/app/storage
+    networks:
+      - streaming-network
+    depends_on:
+      mongodb:
+        condition: service_started
+      postgres:
+        condition: service_started
+      config-server:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+
+  playback-3:
+    build:
+      context: ./playback
+      dockerfile: Dockerfile
+    container_name: playback-3
+    environment:
+      INSTANCE_ID: playback-3
+      INSTANCE_HOST: playback-3
+      INSTANCE_PORT: 8080
+      STREAMING_CAPACITY: 100
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./playback/storage-3:/app/storage
+    networks:
+      - streaming-network
+    depends_on:
+      mongodb:
+        condition: service_started
+      postgres:
+        condition: service_started
+      config-server:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
 
 
 
