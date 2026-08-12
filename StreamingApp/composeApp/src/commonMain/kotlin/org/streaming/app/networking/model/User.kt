@@ -68,7 +68,7 @@ data class MyListRequest(
 
 @Serializable
 data class AddMyListRequest(
-    val movieId: Long,
+    val movieId: String,
     val email: String,
     val type: ListType
 )

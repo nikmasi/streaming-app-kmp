@@ -22,6 +22,7 @@ import org.streaming.app.ui.myList.MyListScreen
 import org.streaming.app.ui.myList.MyListViewModel
 import org.streaming.app.ui.navigation.Route
 import org.streaming.app.ui.profile.ProfileScreen
+import org.streaming.app.ui.profile.ProfileViewModel
 import org.streaming.app.ui.search.MovieViewModel
 import org.streaming.app.ui.search.SearchScreen
 import org.streaming.app.ui.videoPlayer.VideoPlayerScreen
@@ -46,6 +47,7 @@ fun App(backStack: SnapshotStateList<Any>) {
     val movieViewModel = remember { MovieViewModel(ktorClient) }
     val homeViewModel = remember { HomeViewModel(ktorClient) }
     val myListViewModel = remember { MyListViewModel(ktorClient) }
+    val profileViewModel = remember { ProfileViewModel(ktorClient) }
 
     //val backStack = remember { mutableStateListOf<Any>(Route.GetStarted) }
 
@@ -166,7 +168,7 @@ fun App(backStack: SnapshotStateList<Any>) {
             }
             entry<Route.Profile> {
                 ProfileScreen(
-                    authViewModel =authViewModel,
+                    profileViewModel =profileViewModel,
                     onLogout = {
                         authViewModel.logout()
                         backStack.clear()

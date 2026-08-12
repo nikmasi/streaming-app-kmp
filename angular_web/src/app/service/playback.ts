@@ -36,7 +36,7 @@ export class Playback {
   private http = inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/v1/playback';
+    'http://localhost:8222/api/v1/playback';
 
   // privremeno
   private readonly userEmail = 'gica@test.com';

@@ -9,6 +9,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -27,9 +28,12 @@ import org.streaming.app.networking.model.Movie
 import org.streaming.app.networking.model.LoginRequest
 import org.streaming.app.networking.model.MyListRequest
 import org.streaming.app.networking.model.ProfileImageRequest
+import org.streaming.app.networking.model.ProfileRequest
+import org.streaming.app.networking.model.ProfileResponse
 import org.streaming.app.networking.model.Search
 import org.streaming.app.networking.model.SearchRequest
 import org.streaming.app.networking.model.SignUpRequest
+import org.streaming.app.networking.model.WatchProgress
 
 class KtorClient{
     fun getClient(): HttpClient {
@@ -152,7 +156,7 @@ class KtorClient{
         return response
     }
 
-    suspend fun addMyList(email: String, movieId:Long, type: ListType): List<Movie>{
+    suspend fun addMyList(email: String, movieId:String, type: ListType): List<Movie>{
         val response = getClient().post{
             url{
                 path("/api/v1/catalog/add-my-list")
@@ -166,4 +170,24 @@ class KtorClient{
     suspend fun getHomeData(): Map<String,List<Movie>>{
         return getClient().get("api/v1/catalog/home").body()
     }
+
+    //continueWatchingContent
+    suspend fun getHistoryData(): List<WatchProgress> {
+        return getClient()
+            .get("api/v1/playback/history") {
+                header("X-User-Email", "gica@test.com")
+            }
+            .body()
+    }
+
+    suspend fun getProfileInfo(email: String): ProfileResponse {
+        return getClient()
+            .post("api/v1/user/profile") {
+                setBody(
+                    ProfileRequest(email = email)
+                )
+            }
+            .body()
+    }
 }
+

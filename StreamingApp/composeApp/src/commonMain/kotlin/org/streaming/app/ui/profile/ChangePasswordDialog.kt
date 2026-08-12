@@ -40,9 +40,9 @@ fun ChangePasswordDialog(
                     fontSize = 14.sp,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
-                PasswordInputField("Trenutna lozinka", oldPassword) { oldPassword = it }
+                //PasswordInputField("Trenutna lozinka", oldPassword) { oldPassword = it }
                 Spacer(modifier = Modifier.height(12.dp))
-                PasswordInputField("Nova lozinka", newPassword) { newPassword = it }
+                //PasswordInputField("Nova lozinka", newPassword) { newPassword = it }
             }
         },
         confirmButton = {

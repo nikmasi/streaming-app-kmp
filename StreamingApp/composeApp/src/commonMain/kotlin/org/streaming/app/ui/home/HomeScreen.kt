@@ -27,21 +27,20 @@ import coil3.compose.AsyncImage
 import org.streaming.app.CommonVerticalScrollbar
 import org.streaming.app.networking.Constants
 import org.streaming.app.networking.model.Movie
+import org.streaming.app.networking.model.WatchProgress
 import org.streaming.app.ui.auth.LoginScreen
 
 @Composable
 fun HomeScreen(
-    onMovieClick: (Long, String, String, List<String>, Int, Int, String, String) -> Unit,
+    onMovieClick: (String, String, String, List<String>, Int, Int, String, String) -> Unit,
     homeViewModel: HomeViewModel
 ) {
     LaunchedEffect(Unit) {
-        //homeViewModel.dramaTop5()
-        homeViewModel.releaseYearTop5()
         homeViewModel.getHomeContent()
+        homeViewModel.continueWatchingContent()
     }
 
-    val top5 = homeViewModel.top5
-    //val genreTop5 = homeViewModel.top5Drama
+    val continueWatchingContent = homeViewModel.continueWatchingContent
 
     val homeContent = homeViewModel.homeContent
 
@@ -53,6 +52,15 @@ fun HomeScreen(
             state = lazyListState
         ) {
             item { FeaturedSection(homeViewModel.top5) }
+
+            item {
+                WatchingMovieContent(
+                    title = "Continue watching",
+                    movies = continueWatchingContent,
+                    onMovieClick = onMovieClick,
+                    isLarge = false
+                )
+            }
 
             homeContent.forEach { (genre, movies) ->
                 item {
@@ -151,7 +159,7 @@ fun FeaturedSection(movies: List<Movie>) {
 @Composable
 fun MovieCategory(
     title: String,
-    onMovieClick: (Long, String, String, List<String>, Int, Int, String, String) -> Unit,
+    onMovieClick: (String, String, String, List<String>, Int, Int, String, String) -> Unit,
     isLarge: Boolean = false, movies: List<Movie>
 ) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
@@ -175,7 +183,7 @@ fun MovieCategory(
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color.DarkGray)
                         .clickable {
-                            onMovieClick(movie.id.timestamp, movie.title, movie.description,
+                            onMovieClick(movie.id, movie.title, movie.description,
                                 movie.genres, movie.duration, movie.releaseYear,
                                 movie.thumbnailUrl, movie.videoUrl)
                         }
@@ -200,6 +208,73 @@ fun MovieCategory(
 
                     Text(
                         text = movie.title,
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.align(Alignment.BottomStart).padding(8.dp),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun WatchingMovieContent(
+    title: String,
+    onMovieClick: (String, String, String, List<String>, Int, Int, String, String) -> Unit,
+    isLarge: Boolean = false, movies: List<WatchProgress>
+) {
+    Column(modifier = Modifier.padding(vertical = 8.dp)) {
+        Text(
+            text = title,
+            color = Color.White,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+        )
+
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(movies) { movie ->
+                Box(
+                    modifier = Modifier
+                        .width(if (isLarge) 150.dp else 110.dp)
+                        .height(if (isLarge) 220.dp else 160.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.DarkGray)
+                        .clickable {
+                            onMovieClick(movie.movie.id, movie.movie.title,
+                                movie.movie.description,
+                                movie.movie.genres,
+                                movie.movie.duration, movie.movie.releaseYear,
+                                movie.movie.thumbnailUrl, movie.movie.videoUrl)
+                        }
+                ) {
+                    AsyncImage(
+                        model = Constants.imageUrl(movie.movie.thumbnailUrl),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
+                                    startY = 100f
+                                )
+                            )
+                    )
+
+                    Text(
+                        text = movie.movie.title,
                         color = Color.White,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,

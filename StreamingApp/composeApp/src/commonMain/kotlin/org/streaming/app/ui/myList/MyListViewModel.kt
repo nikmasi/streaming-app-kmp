@@ -30,7 +30,7 @@ class MyListViewModel(
         }
     }
 
-    fun addMyList(email: String, movieId: Long, type: ListType){
+    fun addMyList(email: String, movieId: String, type: ListType){
         viewModelScope.launch {
             try {
                 ktorClient.addMyList(email,movieId,type)

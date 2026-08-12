@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.streaming.app.networking.KtorClient
 import org.streaming.app.networking.model.Movie
+import org.streaming.app.networking.model.WatchProgress
 
 class HomeViewModel(
     private val ktorClient: KtorClient
@@ -22,7 +23,13 @@ class HomeViewModel(
     var homeContent by mutableStateOf<Map<String, List<Movie>>>(emptyMap())
         private set
 
+    var continueWatchingContent by mutableStateOf<List<WatchProgress>>(emptyList())
+        private set
+
     var isLoading by mutableStateOf(false)
+        private set
+
+    var isLoading2 by mutableStateOf(false)
         private set
 
     fun getHomeContent() {
@@ -35,6 +42,20 @@ class HomeViewModel(
                 println("Greška pri dohvatanju: ${e.message}")
             } finally {
                 isLoading = false
+            }
+        }
+    }
+
+    fun continueWatchingContent(){
+        viewModelScope.launch {
+            isLoading2 = true
+            try {
+                val response = ktorClient.getHistoryData()
+                continueWatchingContent = response
+            } catch (e: Exception) {
+                println("Greška pri dohvatanju: ${e.message}")
+            } finally {
+                isLoading2 = false
             }
         }
     }

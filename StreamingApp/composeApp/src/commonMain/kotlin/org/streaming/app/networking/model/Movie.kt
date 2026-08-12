@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Movie(
-    val id: IdObject,
+    val id: String,
     val title: String,
     val description: String,
     val genres: List<String>,
@@ -23,4 +23,15 @@ data class IdObject(
 @Serializable
 data class HomeContent(
     val sections: Map<String, List<Movie>>
+)
+
+
+@Serializable
+data class WatchProgress(
+    val movie: Movie,
+    val movieId: String,
+    val positionSeconds: Double,
+    val durationSeconds: Double,
+    val completed: Boolean,
+    val lastWatchedAt: String
 )

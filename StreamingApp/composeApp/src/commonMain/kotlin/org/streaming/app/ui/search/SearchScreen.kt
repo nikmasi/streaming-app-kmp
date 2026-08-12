@@ -29,7 +29,7 @@ import org.streaming.app.CommonVerticallGridScrollbar
 @Composable
 fun SearchScreen(
     viewModel: MovieViewModel,
-    onMovieClick: (Long, String, String, List<String>, Int, Int, String, String) -> Unit,
+    onMovieClick: (String, String, String, List<String>, Int, Int, String, String) -> Unit,
     userEmail: String
 ) {
     var searchQuery by remember { mutableStateOf("") }
@@ -162,7 +162,7 @@ fun SearchScreen(
                         val movie = viewModel.movies[index]
                         MovieItem(movie = movie, onClick = {
                             onMovieClick(
-                                movie.id.timestamp,
+                                movie.id,
                                 movie.title,
                                 movie.description,
                                 movie.genres,

@@ -3,17 +3,11 @@ package org.streaming.app.ui.profile
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,18 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 import org.streaming.app.CommonVerticalScrollbar
-import org.streaming.app.ui.auth.AuthViewModel
 import streamingapp.composeapp.generated.resources.Res
 import streamingapp.composeapp.generated.resources.blue_face
 import streamingapp.composeapp.generated.resources.chicken_face
@@ -41,246 +30,311 @@ import streamingapp.composeapp.generated.resources.purple_face
 import streamingapp.composeapp.generated.resources.red_face
 import streamingapp.composeapp.generated.resources.yellow_face
 
+
+data class UserProfile(
+    var firstName: String,
+    var lastName: String,
+    var email: String,
+    var phone: String,
+    var role: String
+)
+
+@Composable
+fun ProfileInfoGrid(
+    firstName: String,
+    lastName: String,
+    email: String,
+    role: String
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
+    ) {
+        ProfileInfoCard(
+            label = "Firstname",
+            value = firstName,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        ProfileInfoCard(
+            label = "Lastname",
+            value = lastName,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        ProfileInfoCard(
+            label = "Email",
+            value = email,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        ProfileInfoCard(
+            label = "Role",
+            value = role.uppercase(),
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun ProfileInfoCard(
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .clip(RoundedCornerShape(10.dp))
+            .background(Color(0xFF2B2B2B))
+            .padding(
+                horizontal = 15.dp,
+                vertical = 20.dp
+            )
+    ) {
+        Text(
+            text = label,
+            color = Color(0xFFAAAAAA),
+            fontSize = 12.sp
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(
+            text = value,
+            color = Color.White,
+            fontSize = 15.sp
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(authViewModel: AuthViewModel,onLogout: () -> Unit) {
+fun ProfileScreen(
+    profileViewModel: ProfileViewModel,
+    onLogout: () -> Unit,
+    onWatchHistory: () -> Unit = {},
+    onHome: () -> Unit = {},
+    onMyList: () -> Unit = {}
+) {
     var isEditMode by remember { mutableStateOf(false) }
     var showPasswordDialog by remember { mutableStateOf(false) }
-    var showSubscriptionInfo by remember { mutableStateOf(false) }
-
-    val userProfile = authViewModel.userProfile
-
     var showIconPicker by remember { mutableStateOf(false) }
 
+    val userProfile = profileViewModel.userProfile
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(Unit) {
+        profileViewModel.getProfileInfo()
+    }
 
     if (showPasswordDialog) {
         ChangePasswordDialog(
-            onDismiss = { showPasswordDialog = false },
-            onConfirm = { _, _ -> showPasswordDialog = false }
+            onDismiss = {
+                showPasswordDialog = false
+            },
+            onConfirm = { _, _ ->
+                showPasswordDialog = false
+            }
         )
     }
 
-    if (showSubscriptionInfo) {
-        SubscriptionDialog(onDismiss = { showSubscriptionInfo = false })
+    if (showIconPicker) {
+        ProfileIconPickerDialog(
+            onDismiss = {
+                showIconPicker = false
+            },
+            onIconSelected = { selectedName ->
+                //profileViewModel.updateProfileImage(selectedName)
+                showIconPicker = false
+            }
+        )
     }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Profil", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold) },
-                actions = {
-                    TextButton(onClick = { isEditMode = !isEditMode }) {
-                        Text(
-                            text = if (isEditMode) "SAČUVAJ" else "IZMENI",
-                            color = if (isEditMode) Color.Green else Color.White,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black)
-            )
-        },
-        containerColor = Color.Black
+        containerColor = Color(0xFF141414)
     ) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
-                .padding(horizontal = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .background(Color(0xFF141414))
+                .padding(padding)
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Box(contentAlignment = Alignment.BottomEnd) {
-                Box(
+            Box(
+                modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
+            ) {
+                Column(
                     modifier = Modifier
-                        .size(100.dp)
-                        .clip(RoundedCornerShape(4.dp))
-                        .background(Color(0xFFE50914))
-                        .clickable(enabled = isEditMode) {
-                            showIconPicker = true
-                        },
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 32.dp,
+                            vertical = 55.dp
+                        ),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = getProfilePainter(authViewModel.userProfile.profileImage),
-                        contentDescription = null,
-                        modifier = Modifier.size(100.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-                if (isEditMode) {
-                    Icon(
-                        Icons.Default.Edit,
-                        contentDescription = null,
-                        tint = Color.White,
+                    Column(
                         modifier = Modifier
-                            .size(28.dp)
-                            .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(4.dp))
-                            .padding(4.dp)
-                    )
-                }
+                            .fillMaxWidth()
+                            .widthIn(max = 1080.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color(0xFF1F1F1F))
+                            .padding(50.dp)
+                    ) {
 
-                if (showIconPicker) {
-                    ProfileIconPickerDialog(
-                        onDismiss = { showIconPicker = false },
-                        onIconSelected = { selectedName ->
-                            authViewModel.updateProfileImage(selectedName)
-                            //authViewModel.userProfile.copy(profileImage = selectedName)
+                        // header
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(144.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(Color(0xFFE50914))
+                                    .clickable(enabled = isEditMode) {
+                                        showIconPicker = true
+                                    }
+                            ) {
+
+                                Image(
+                                    painter = getProfilePainter(
+                                        userProfile.profileImage
+                                    ),
+                                    contentDescription = "Profile image",
+                                    contentScale = ContentScale.Crop
+                                )
+
+                                if (isEditMode) {
+                                    Icon(
+                                        imageVector = Icons.Default.Edit,
+                                        contentDescription = "Edit profile image",
+                                        tint = Color.White,
+                                        modifier = Modifier
+                                            .align(Alignment.BottomEnd)
+                                            .padding(8.dp)
+                                            .size(34.dp)
+                                            .background(
+                                                Color.Black.copy(alpha = 0.75f),
+                                                RoundedCornerShape(6.dp)
+                                            )
+                                            .padding(7.dp)
+                                    )
+                                }
+                            }
                         }
-                    )
-                }
-            }
 
-            Spacer(modifier = Modifier.height(32.dp))
+                        Spacer(modifier = Modifier.height(20.dp))
 
-            ProfileSectionTitle("LIČNI PODACI")
-            ProfileInputField("Ime i Prezime", userProfile.fullName, isEditMode) { userProfile.fullName = it }
-            ProfileInputField("Email", userProfile.email, isEditMode) { userProfile.email = it }
-            ProfileInputField("Telefon", userProfile.phone, isEditMode) { userProfile.phone = it }
+                        HorizontalDivider(
+                            color = Color(0xFF383838),
+                            thickness = 1.dp
+                        )
 
-            Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(20.dp))
 
-            ProfileSectionTitle("UPRAVLJANJE NALOGOM")
+                        ProfileInfoGrid(
+                            firstName = userProfile.firstname,
+                            lastName = userProfile.lastname,
+                            email = userProfile.email,
+                            role = userProfile.role
+                        )
 
-            ProfileOption(
-                title = "Promeni profil (Ko gleda?)",
-                icon = Icons.Default.AccountBox,
-                onClick = { /* Ovde bi išla navigacija na ProfileSelectionScreen */ }
-            )
-            ProfileOption(
-                title = "Pretplata: Premium Plan",
-                icon = Icons.Default.Star,
-                onClick = { showSubscriptionInfo = true }
-            )
-            ProfileOption(
-                title = "Promeni lozinku",
-                icon = Icons.Default.Lock,
-                onClick = { showPasswordDialog = true }
-            )
+                        Spacer(modifier = Modifier.height(10.dp))
 
-            Spacer(modifier = Modifier.height(24.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
 
-            ProfileSectionTitle("APLIKACIJA")
-            ProfileOption("Moja lista", Icons.Default.Check, {})
-            ProfileOption("Podešavanja aplikacije", Icons.Default.Settings, {})
+                            ProfileActionButton(
+                                text = if (isEditMode) {
+                                    "Save Profile"
+                                } else {
+                                    "Edit Profile"
+                                },
+                                backgroundColor = Color(0xFFE50914),
+                                textColor = Color.White,
+                                onClick = {
+                                    isEditMode = !isEditMode
+                                }
+                            )
 
-            Spacer(modifier = Modifier.height(40.dp))
+                            Spacer(modifier = Modifier.width(16.dp))
 
-            Text(
-                "Odjavi se",
-                color = Color.LightGray,
-                modifier = Modifier.fillMaxWidth().clickable { onLogout() }.padding(16.dp),
-                fontSize = 14.sp,
-                textAlign = TextAlign.Center
-            )
-            Spacer(modifier = Modifier.height(74.dp))
-        }
-            CommonVerticalScrollbar(
-                state = scrollState,
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .fillMaxHeight()
-                    .padding(vertical = 4.dp, horizontal = 2.dp)
-            )
-        }
-    }
-}
+                            ProfileActionButton(
+                                text = "Change Password",
+                                backgroundColor = Color(0xFF4A4A4A),
+                                textColor = Color.White,
+                                onClick = {
+                                    showPasswordDialog = true
+                                }
+                            )
 
-@Composable
-fun ProfileOption(title: String, icon: ImageVector, onClick: () -> Unit) {
-    Row(
-        modifier = Modifier.fillMaxWidth().clickable { onClick() }.padding(vertical = 14.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(icon, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(22.dp))
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(title, color = Color.White, fontSize = 15.sp)
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(Icons.Default.KeyboardArrowRight, contentDescription = null, tint = Color.DarkGray)
-    }
-}
+                            Spacer(modifier = Modifier.width(16.dp))
 
-@Composable
-fun SubscriptionDialog(onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        containerColor = Color(0xFF1A1A1A),
-        title = { Text("Status pretplate", color = Color.White) },
-        text = {
-            Column {
-                Text("Vaš paket: Premium (4K + HDR)", color = Color.White, fontWeight = FontWeight.Bold)
-                Text("Sledeća naplata: 14. Maj 2026.", color = Color.Gray, fontSize = 14.sp)
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(4.dp)
-                ) {
-                    Text("PROMENI PAKET", color = Color.Black)
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = onDismiss) { Text("ZATVORI", color = Color(0xFFE50914)) }
-        }
-    )
-}
+                            ProfileActionButton(
+                                text = "Logout",
+                                backgroundColor = Color(0xFF1B1B1B),
+                                textColor = Color(0xFFE50914),
+                                onClick = onLogout
+                            )
 
-@Composable
-fun ProfileSectionTitle(title: String) {
-    Text(
-        text = title,
-        color = Color.Gray,
-        fontSize = 12.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
-    )
-}
+                            Spacer(modifier = Modifier.width(16.dp))
 
-@Composable
-fun ProfileInputField(
-    label: String, value: String, isEditable: Boolean, onValueChange: (String) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp)
-            .background(if (isEditable) Color(0xFF1A1A1A) else Color.Transparent, RoundedCornerShape(4.dp))
-            .padding(if (isEditable) 12.dp else 0.dp)
-    ) {
-        if (!isEditable) {
-            Text(label, color = Color.Gray, fontSize = 11.sp)
-        }
-
-        if (isEditable) {
-            BasicTextField(
-                value = value,
-                onValueChange = onValueChange,
-                textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
-                cursorBrush = SolidColor(Color(0xFFE50914)),
-                modifier = Modifier.fillMaxWidth(),
-                decorationBox = { innerTextField ->
-                    Column {
-                        Text(label, color = Color(0xFFE50914), fontSize = 10.sp, fontWeight = FontWeight.Bold)
-                        innerTextField()
+                            ProfileActionButton(
+                                text = "Watch History",
+                                backgroundColor = Color(0xFFE50914),
+                                textColor = Color.White,
+                                onClick = onWatchHistory
+                            )
+                        }
                     }
                 }
-            )
-        } else {
-            Text(
-                value,
-                color = Color.White,
-                fontSize = 16.sp,
-                modifier = Modifier.padding(top = 2.dp, bottom = 8.dp)
-            )
-            Divider(color = Color(0xFF222222), thickness = 1.dp)
+
+                CommonVerticalScrollbar(
+                    state = scrollState,
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .fillMaxHeight()
+                        .padding(
+                            vertical = 4.dp,
+                            horizontal = 2.dp
+                        )
+                )
+            }
         }
     }
 }
+
+@Composable
+fun ProfileActionButton(
+    text: String,
+    backgroundColor: Color,
+    textColor: Color,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = backgroundColor,
+            contentColor = textColor
+        ),
+        shape = RoundedCornerShape(6.dp),
+        contentPadding = PaddingValues(
+            horizontal = 26.dp,
+            vertical = 12.dp
+        )
+    ) {
+        Text(
+            text = text,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
+
 
 @Composable
 fun getProfilePainter(imageName: String?): Painter {
