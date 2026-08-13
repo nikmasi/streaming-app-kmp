@@ -3,14 +3,19 @@ import { User } from '../../service/user';
 import { ProfileResponse } from '../../model/profile-response';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
 export class Profile implements OnInit{
+  constructor(
+    private translate: TranslateService
+  ) {}
+
   isScrolled = false;
 
   @HostListener('window:scroll', [])

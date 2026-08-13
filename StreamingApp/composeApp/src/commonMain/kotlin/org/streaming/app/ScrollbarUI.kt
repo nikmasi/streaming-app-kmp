@@ -13,7 +13,7 @@ expect fun CommonVerticalScrollbar(
 )
 
 @Composable
-expect fun CommonVerticallGridScrollbar(
+expect fun CommonVerticalGridScrollbar(
     state: LazyGridState,
     modifier: Modifier = Modifier
 )

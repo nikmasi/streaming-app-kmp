@@ -1,0 +1,78 @@
+{
+  "HOME": {
+    "TITLE": "Neograničeni filmovi, serije i još mnogo toga",
+    "DESCRIPTION": "Spremni ste za gledanje? Unesite imejl da kreirate ili obnovite članstvo.",
+    "EMAIL": "Imejl adresa",
+    "PASSWORD": "Lozinka",
+    "HELP": "Potrebna pomoć?",
+    "NEW": "Novi na Netflix-u?",
+    "SIGN_UP": "Registruj se sada.",
+    "GET_STARTED": "Započni"
+  },
+  "HEADER": {
+    "SIGN_IN": "Prijavi se"
+  },
+  "FOOTER": {
+    "TITLE":"Ova stranica je zaštićena uslugom Google reCAPTCHA kako bismo bili sigurni da niste bot."
+  },
+  "REASONS":{
+    "TITLE": "Više razloga da se pridružite",
+    "TV": {
+      "TITLE": "Uživaj na TV-u",
+      "DESCRIPTION": "Gledaj na Smart TV-u, Playstation-u, Xbox-u, Cgromecast-u, Apple TV-u, Blu-ray players-u, i više."
+    },
+    "DOWNLOAD": {
+      "TITLE": "Preuzmi emisije da bi gledao online",
+      "DESCRIPTION": "Preuzmi omiljeni sadržaj lako da bi uvek imao nešto da gledaš."
+    },
+    "WATCH": {
+      "TITLE": "Gledaj svuda",
+      "DESCRIPTION": "Strimuj neograničeno filmove i serije na tvom telefon, tabletu, laptopu i TV-u."
+    }
+  },
+  "FAQ": {
+    "TITLE": "Često postavljana pitanja",
+    "WHAT_IS_NETFLIX": {
+      "Q":"Šta je Netflix?",
+      "A": "Netflix je striming platforma sa ponudom filmova, serija, dokumentaraca i ostalog."
+    },
+    "HOW_MUCH": {
+      "Q":"Koliko Netflix košta?",
+      "A": "Netflix je striming platforma sa ponudom filmova, serija, dokumentaraca i ostalog."
+    },
+    "WHERE": {
+      "Q":"Gde mogu da gledam?",
+      "A": "Možete gledati na pametnim televizorima, telefonima, tabletima, laptopovima, konzolama za igre i uređajima za streaming."
+    },
+    "CANCEL": {
+      "Q":"Kako da otkažem?",
+      "A": "Članstvo možete otkazati u bilo kom trenutku u podešavanjima svog naloga."
+    },
+    "WHAT_CAN_I_WATCH": {
+      "Q":"Šta mogu da gledam na Netflixu?",
+      "A": "Možete gledati filmove, TV serije, dokumentarce i originalne produkcije."
+    },
+    "KIDS": {
+      "Q":"Da li je Netflix dobar za decu?",
+      "A": ""
+    }
+  },
+  "NAV_MENU": {
+    "HOME": "Početna",
+    "TV_SHOWS": "Serije",
+    "MOVIES": "Filmovi",
+    "MY_List": "Moja Lista"
+  },
+  "PROFILE": {
+    "FIRSTNAME": "Ime",
+    "LASTNAME": "Prezime",
+    "EMAIL": "Imejl",
+    "ROLE": "Rola",
+    "EDIT": "Izmeni podatke",
+    "CHANGE_PASSWORD": "Izmeni lozinku",
+    "LOGOUT": "Odjavi se",
+    "WATCH_HISTORY": "Istorija gledanja",
+    "SAVE_CHANGES": "Sačuvaj promene",
+    "CANCEL": "Otkaži"
+  }
+}

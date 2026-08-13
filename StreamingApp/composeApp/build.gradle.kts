@@ -58,6 +58,10 @@ kotlin {
             implementation(libs.media3.ui)
             implementation(libs.androidx.media3.exoplayer.hls)
 
+            // data store
+            implementation(libs.androidx.datastore)
+            implementation(libs.androidx.datastore.preferences)
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -114,6 +118,9 @@ kotlin {
             implementation(libs.media3.exoplayer)
             implementation(libs.media3.ui)
 
+            // data store
+            implementation(libs.androidx.datastore)
+            implementation(libs.androidx.datastore.preferences)
 
         }
         commonTest.dependencies {

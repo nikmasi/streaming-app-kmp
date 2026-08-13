@@ -6,25 +6,24 @@
 
     <div class="overlay"></div>
     <div class="signin-box">
-        <h1>Sign In</h1>
+        <h1>{{ 'HEADER.SIGN_IN' | translate }}</h1>
         <form>
-            <input type="email" placeholder="Email"  name="email" [(ngModel)]="email">
+            <input type="email" placeholder="{{ 'HOME.EMAIL' | translate }}"  name="email" [(ngModel)]="email">
 
-            <input type="password" placeholder="Password" name="password" [(ngModel)]="password">
+            <input type="password" placeholder="{{ 'HOME.PASSWORD' | translate }}" name="password" [(ngModel)]="password">
 
-            <button type="submit" (click)="signIn()"> Sign In </button>
+            <button type="submit" (click)="signIn()"> {{ 'HEADER.SIGN_IN' | translate }} </button>
         </form>
 
         <div class="options">
-            <a href="#">Need help?</a>
+            <a href="#">{{ 'HOME.HELP' | translate }}</a>
         </div>
 
         <div class="signup">
-            New to Netflix?
-            <a href="#"> Sign up now. </a>
+            {{ 'HOME.NEW' | translate }}
+            <a href="#"> {{ 'HOME.SIGN_UP' | translate }} </a>
         </div>
 
         <p>{{error}}</p>
-
     </div>
 </div>

@@ -1,26 +1,112 @@
 <div class="landing-page">
-  <header class="header">
-    <h1 class="logo">NETFLIX</h1>
-    <button class="sign-in" (click)="sign_in()">
-      Sign In
-    </button>
-  </header>
+  <section class="hero">
 
-  <div class="overlay"></div>
+    <header class="header">
+      <h1 class="logo">NETFLIX</h1>
 
-  <div class="content">
-    <h1>Unlimited movies, TV </h1>
-    <h1>shows, and more</h1>
-    <p>
-      Ready to watch? Enter your email to create or restart your membership.
-    </p>
+      <button class="sign-in" (click)="sign_in()">{{ 'HEADER.SIGN_IN' | translate }}</button>
+      <button class="sign-in" (click)="changeLanguage('sr')"> SR </button>
+      <button class="sign-in" (click)="changeLanguage('en')"> EN </button>
+    </header>
 
-    <div class="email-box">
-      <input type="email" [(ngModel)]="email" placeholder="Email address">
+    <div class="overlay"></div>
 
-      <button (click)="sign_up()">
-        Get Started >
-      </button>
+    <div class="content">
+      <h1> {{ 'HOME.TITLE' | translate }}</h1>
+      <p>{{ 'HOME.DESCRIPTION' | translate }}</p>
+
+      <div class="email-box">
+        <input type="email" [(ngModel)]="email" placeholder="{{ 'HOME.EMAIL' | translate }}"/>
+        <button (click)="sign_up()">{{ 'HOME.GET_STARTED' | translate }} ></button>
+      </div>
     </div>
+  </section>
+
+  <!-- MORE REASONS -->
+  <section class="reasons-section">
+    <h2>{{ 'REASONS.TITLE' | translate }}</h2>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div>
+          <h3>{{ 'REASONS.TV.TITLE' | translate }}</h3>
+          <p>{{ 'REASONS.TV.DESCRIPTION' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div>
+          <h3>{{ 'REASONS.DOWNLOAD.TITLE' | translate }}</h3>
+          <p>{{ 'REASONS.DOWNLOAD.DESCRIPTION' | translate }}</p>
+        </div>
+
+      </div>
+      <div class="reason-card">
+        <div>
+          <h3>{{ 'REASONS.WATCH.TITLE' | translate }}</h3>
+          <p>{{ 'REASONS.WATCH.DESCRIPTION' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>{{ 'FAQ.TITLE' | translate }}</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" (click)="toggleFaq(0)">
+        <span>{{ 'FAQ.WHAT_IS_NETFLIX.Q' | translate }}</span>
+        <span class="plus">{{ openedFaq === 0 ? 'x' : '+' }}</span>
+      </button>
+
+      <div class="faq-answer" *ngIf="openedFaq === 0">{{ 'FAQ.WHAT_IS_NETFLIX.A' | translate }}</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" (click)="toggleFaq(1)">
+        <span>{{ 'FAQ.HOW_MUCH.Q' | translate }}</span>
+        <span class="plus">{{ openedFaq === 1 ? 'x' : '+' }}</span>
+      </button>
+
+      <div class="faq-answer" *ngIf="openedFaq === 1">{{ 'FAQ.HOW_MUCH.A' | translate }}</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" (click)="toggleFaq(2)">
+        <span>{{ 'FAQ.WHERE.Q' | translate }}</span>
+        <span class="plus">{{ openedFaq === 2 ? 'x' : '+' }}</span>
+      </button>
+
+      <div class="faq-answer" *ngIf="openedFaq === 2">{{ 'FAQ.WHERE.A' | translate }} </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question"  (click)="toggleFaq(3)">
+        <span>{{ 'FAQ.CANCEL.A' | translate }}</span>
+        <span class="plus">{{ openedFaq === 3 ? 'x' : '+' }}</span>
+      </button>
+
+      <div class="faq-answer" *ngIf="openedFaq === 3">{{ 'FAQ.CANCEL.Q' | translate }}</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" (click)="toggleFaq(4)">
+        <span>{{ 'FAQ.WHAT_CAN_I_WATCH.Q' | translate }}</span>
+        <span class="plus">{{ openedFaq === 4 ? 'x' : '+' }}</span>
+      </button>
+
+      <div class="faq-answer" *ngIf="openedFaq === 4">{{ 'FAQ.WHAT_CAN_I_WATCH.A' | translate }}</div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <p class="footer-title">Netflix</p>
+    <p class="recaptcha-text">
+      {{ 'FOOTER.TITLE' | translate }}
+    </p>
   </div>
+</footer>
 </div>

@@ -31,7 +31,7 @@ class MovieController(
     )
 
     data class MovieResponse(
-        val id: String,
+        val id: c,
         val title: String,
         val description: String,
         val genres: List<String>,

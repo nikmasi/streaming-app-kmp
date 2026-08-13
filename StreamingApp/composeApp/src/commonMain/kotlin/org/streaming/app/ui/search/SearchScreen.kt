@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.streaming.app.CommonVerticallGridScrollbar
+import org.streaming.app.CommonVerticalGridScrollbar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -174,7 +174,7 @@ fun SearchScreen(
                         })
                     }
                 }
-                CommonVerticallGridScrollbar(
+                CommonVerticalGridScrollbar(
                     state = lazyListState,
                     modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
                 )

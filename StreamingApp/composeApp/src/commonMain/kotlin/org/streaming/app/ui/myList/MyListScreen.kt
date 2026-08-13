@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,8 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.streaming.app.CommonVerticalScrollbar
-import org.streaming.app.CommonVerticallGridScrollbar
+import org.streaming.app.CommonVerticalGridScrollbar
 import org.streaming.app.networking.model.ListType
 import org.streaming.app.ui.search.MovieItem
 
@@ -66,7 +64,7 @@ fun MyListScreen(
                     })
                 }
             }
-            CommonVerticallGridScrollbar(
+            CommonVerticalGridScrollbar(
                 state = lazyListState,
                 modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
             )

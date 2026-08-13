@@ -30,7 +30,7 @@ actual fun CommonVerticalScrollbar(
 }
 
 @Composable
-actual fun CommonVerticallGridScrollbar(
+actual fun CommonVerticalGridScrollbar(
     state: LazyGridState,
     modifier: Modifier,
 ) {

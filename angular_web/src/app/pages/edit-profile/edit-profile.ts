@@ -3,15 +3,20 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../service/user';
 import { ProfileResponse } from '../../model/profile-response';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [ FormsModule, RouterLink ],
+  imports: [ FormsModule, RouterLink, TranslatePipe ],
   templateUrl: './edit-profile.html',
   styleUrl: './edit-profile.css',
 })
 export class EditProfile implements OnInit {
+  constructor(
+    private translate: TranslateService
+  ) {}
+  
   userService = inject(User);
   router = inject(Router);
 

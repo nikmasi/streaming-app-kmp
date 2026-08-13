@@ -4,10 +4,10 @@
     <div class="nav-left">
       <div class="logo">NETFLIX</div>
       <nav class="nav-links">
-        <a routerLink="/home" routerLinkActive="active">Home</a>
-        <a href="#">TV Shows</a>
-        <a href="#">Movies</a>
-        <a href="my-list">My List</a>
+        <a routerLink="/home" routerLinkActive="active">{{ 'NAV_MENU.HOME' | translate }}</a>
+        <a href="#">{{ 'NAV_MENU.TV_SHOWS' | translate }}</a>
+        <a href="#">{{ 'NAV_MENU.MOVIES' | translate }}</a>
+        <a href="my-list">{{ 'NAV_MENU.MY_List' | translate }}</a>
       </nav>
     </div>
     <div class="nav-right">
@@ -30,37 +30,37 @@
     <div class="profile-info">
 
       <div class="info">
-        <label>First Name</label>
+        <label>{{ 'PROFILE.FIRSTNAME' | translate }}</label>
         <p>{{user.firstname}}</p>
       </div>
       <div class="info">
-        <label>Last Name</label>
+        <label>{{ 'PROFILE.LASTNAME' | translate }}</label>
         <p>{{user.lastname}}</p>
       </div>
 
       <div class="info">
-        <label>Email</label>
+        <label>{{ 'PROFILE.EMAIL' | translate }}</label>
         <p>{{user.email}}</p>
       </div>
 
       <div class="info">
-        <label>Role</label>
+        <label>{{ 'PROFILE.ROLE' | translate }}</label>
         <p>{{user.role}}</p>
       </div>
     </div>
 
     <div class="buttons">
       <button class="edit" (click)="edit_profile()">
-        Edit Profile
+        {{ 'PROFILE.EDIT' | translate }}
       </button>
       <button class="password">
-        Change Password
+        {{ 'PROFILE.CHANGE_PASSWORD' | translate }}
       </button>
       <button class="logout" (click)="logout()">
-        Logout
+        {{ 'PROFILE.LOGOUT' | translate }}
       </button>
       <button class="edit" (click)="watch_history()">
-        Watch History
+        {{ 'PROFILE.WATCH_HISTORY' | translate }}
       </button>
     </div>
   </div>

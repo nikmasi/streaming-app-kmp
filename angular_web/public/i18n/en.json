@@ -1,0 +1,78 @@
+{
+  "HOME": {
+    "TITLE": "Unlimited movies, TV shows, and more",
+    "DESCRIPTION": "Ready to watch? Enter your email to create or restart your membership.",
+    "EMAIL": "Email address",
+    "PASSWORD": "Password",
+    "HELP": "Need help?",
+    "NEW": "New to Netflix?",
+    "SIGN_UP": "Sign up now.",
+    "GET_STARTED": "Get Started"
+  },
+  "HEADER": {
+    "SIGN_IN": "Sign In"
+  },
+  "FOOTER": {
+    "TITLE":"This page is protected by Google reCAPTCHA to ensure you're not a bot."
+  },
+  "REASONS":{
+    "TITLE": "More Reasons to Join",
+    "TV": {
+      "TITLE": "Uživaj na TV-u",
+      "DESCRIPTION": "Gledaj na Smart TV-u, Playstation-u, Xbox-u, Cgromecast-u, Apple TV-u, Blu-ray players-u, i više."
+    },
+    "DOWNLOAD": {
+      "TITLE": "Preuzmi emisije da bi gledao online",
+      "DESCRIPTION": "Preuzmi omiljeni sadržaj lako da bi uvek imao nešto da gledaš."
+    },
+    "WATCH": {
+      "TITLE": "Gledaj svuda",
+      "DESCRIPTION": "Strimuj neograničeno filmove i serije na tvom telefon, tabletu, laptopu i TV-u."
+    }
+  },
+  "FAQ": {
+    "TITLE": "Frequently Asked Questions",
+    "WHAT_IS_NETFLIX": {
+      "Q":"What is Netflix?",
+      "A": "Netflix is a streaming service that offers movies,TV shows, documentaries, and more."
+    },
+    "HOW_MUCH": {
+      "Q": "How much does Netflix cost?",
+      "A": "Netflix offers different membership plans depending on your needs."
+    },
+    "WHERE": {
+      "Q":"Where can I watch?",
+      "A": "You can watch on smart TVs, phones, tablets, laptops, game consoles, and streaming devices."
+    },
+    "CANCEL": {
+      "Q":"How do I cancel?",
+      "A": "You can cancel your membership at any time from your account settings."
+    },
+    "WHAT_CAN_I_WATCH": {
+      "Q":"What can I watch on Netflix?",
+      "A": "You can watch movies, TV shows, documentaries, and original productions."
+    },
+    "KIDS": {
+      "Q":"Is Netflix good for kids?",
+      "A": ""
+    }
+  },
+  "NAV_MENU": {
+    "HOME": "Home",
+    "TV_SHOWS": "TV Shows",
+    "MOVIES": "Movies",
+    "MY_List": "My List"
+  },
+  "PROFILE": {
+    "FIRSTNAME": "First Name",
+    "LASTNAME": "Last Name",
+    "EMAIL": "Email",
+    "ROLE": "Role",
+    "EDIT": "Edit Profile",
+    "CHANGE_PASSWORD": "Change Password",
+    "LOGOUT": "Logout",
+    "WATCH_HISTORY": "Watch History",
+    "SAVE_CHANGES": "Save changes",
+    "CANCEL": "Cancel"
+  }
+}

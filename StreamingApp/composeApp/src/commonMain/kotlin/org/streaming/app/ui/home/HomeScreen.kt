@@ -28,7 +28,6 @@ import org.streaming.app.CommonVerticalScrollbar
 import org.streaming.app.networking.Constants
 import org.streaming.app.networking.model.Movie
 import org.streaming.app.networking.model.WatchProgress
-import org.streaming.app.ui.auth.LoginScreen
 
 @Composable
 fun HomeScreen(
