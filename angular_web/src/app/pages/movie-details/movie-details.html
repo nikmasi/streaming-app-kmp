@@ -21,7 +21,7 @@
             </div>
 
             <div class="buttons">
-                <button class="play" (click)="playMovie(movie)"> ▶ Play </button>
+                <button class="play" (click)="playMovie(movie)"> ▶ {{ 'NAV_MENU.PLAY' | translate }} </button>
 
                 <button class="action-button" [class.active]="isLiked" (click)="toggleLike()">❤️</button>
                 <button class="action-button" [class.active]="isDisliked" (click)="toggleDislike()">👎</button>
@@ -38,40 +38,28 @@
         </div>
 
         <div class="info">
-
-            <h2>About this movie</h2>
-
+            <h2>{{ 'MOVIE.ABOUT' | translate }}</h2>
             <p>{{ movie.description }}</p>
 
             <div class="grid">
 
                 <div>
-                    <h4>Release</h4>
+                    <h4>{{ 'MOVIE.RELEASE' | translate }}</h4>
                     <p>{{ movie.releaseYear }}</p>
                 </div>
 
                 <div>
-                    <h4>Duration</h4>
+                    <h4>{{ 'MOVIE.DURATION' | translate }}</h4>
                     <p>{{ movie.duration }} min</p>
                 </div>
 
                 <div>
-                    <h4>Genres</h4>
-
+                    <h4>{{ 'MOVIE.GENRES' | translate }}</h4>
                     <div class="genres">
-                        <span
-                            class="genre"
-                            *ngFor="let genre of movie.genres">
-                            {{ genre }}
-                        </span>
+                        <span class="genre" *ngFor="let genre of movie.genres">{{ genre }}</span>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
-
 </div>

@@ -4,33 +4,35 @@
     <div class="nav-left">
       <div class="logo">NETFLIX</div>
       <nav class="nav-links">
-        <a routerLink="/home" routerLinkActive="active">Home</a>
-        <a href="#">TV Shows</a>
-        <a href="#">Movies</a>
-        <a href="my-list">My List</a>
+        <a routerLink="/home" routerLinkActive="active">{{ 'NAV_MENU.HOME' | translate }}</a>
+        <a href="#">{{ 'NAV_MENU.TV_SHOWS' | translate }}</a>
+        <a href="#">{{ 'NAV_MENU.MOVIES' | translate }}</a>
+        <a href="my-list">{{ 'NAV_MENU.MY_List' | translate }}</a>
       </nav>
     </div>
+   
     <div class="nav-right">
+      <button class="icon-btn">
+        <span class="material-icons" (click)="search()">search</span>
+      </button>
+      <div class="profile-menu">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profil" (click)="profile()">
+      </div>
     </div>
   </header>
 
     <div class="search-bar">
-        <input
-            type="text"
-            placeholder="Search movies, TV shows..."
-            [(ngModel)]="query"
-            (ngModelChange)="searchMovies($event)">
+        <input type="text" placeholder="{{ 'SEARCH.SEARCH' | translate }}"
+            [(ngModel)]="query" (ngModelChange)="searchMovies($event)">
     </div>
 
     <!-- TRENDING -->
     <section *ngIf="query === ''">
 
-        <h2>Trending Movies</h2>
+        <h2>{{ 'SEARCH.SUBTITLE' | translate }}</h2>
 
         <div class="movies">
-
             <div class="card" *ngFor="let movie of data" (click)="openMovie(movie)">
-
                 <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
 
                 <div class="movie-info">
@@ -40,27 +42,22 @@
 
             </div>
         </div>
-
     </section>
 
     <!-- SEARCH RESULTS -->
     <section *ngIf="query !== ''">
 
-        <h2>Search Results</h2>
+        <h2>{{ 'SEARCH.RESULTS' | translate }}</h2>
 
         <div class="movies">
-
             @for (movie of searchData; track movie._id) {
-
                 <div class="card" (click)="openMovie(movie)">
                     <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
-
                     <div class="movie-info">
                         <h3>{{ movie.title }}</h3>
                         <p>{{ movie.releaseYear }}</p>
                         <p>{{ movie.description }}</p>
                     </div>
-
                 </div>
             }
         </div>

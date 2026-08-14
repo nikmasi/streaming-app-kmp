@@ -2,28 +2,24 @@
   <header class="header">
     <h1 class="logo">NETFLIX</h1>
 
-    <button class="sign-in" (click)="sign_in()"> Sign In </button>
+    <button class="sign-in" (click)="sign_in()"> {{ 'HEADER.SIGN_IN' | translate }} </button>
   </header>
 
   <div class="overlay"></div>
 
   <div class="content">
     <div class="password-card">
-      <span class="step"> STEP 1 OF 2 </span>
+      <span class="step"> {{ 'SIGN_UP.STEP' | translate }} </span>
 
-      <h1>Create a firstname and lastname to start your membership</h1>
-
-      <p>
-        Just a few more steps and you're done! We hate paperwork, too.
-      </p>
+      <h1> {{ 'SIGN_UP.SUBTITLE' | translate }}</h1>
+      <p>{{ 'SIGN_UP.DESCRIPTION' | translate }}</p>
 
       <p class="email"> {{ email }} </p>
 
-      <input type="firstname" placeholder="Firstname" [(ngModel)]="firstname">
+      <input type="firstname" placeholder="{{ 'SIGN_UP.FIRSTNAME' | translate }}" [(ngModel)]="firstname">
+      <input type="lastname" placeholder="{{ 'SIGN_UP.LASTNAME' | translate }}" [(ngModel)]="lastname">
 
-      <input type="lastname" placeholder="Lastname" [(ngModel)]="lastname">
-
-      <button class="next-btn" (click)="sign_up()"> Next </button>
+      <button class="next-btn" (click)="sign_up()"> {{ 'SIGN_UP.NEXT' | translate }} </button>
 
     </div>
   </div>

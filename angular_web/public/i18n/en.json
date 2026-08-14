@@ -61,7 +61,12 @@
     "HOME": "Home",
     "TV_SHOWS": "TV Shows",
     "MOVIES": "Movies",
-    "MY_List": "My List"
+    "MY_List": "My List",
+    "SEARCH": "Search",
+    "PLAY": "Play",
+    "MORE_INFO": "More informations",
+    "CONTINUE_WATCHING": "Continue watching",
+    "PROFILE": "Profile"
   },
   "PROFILE": {
     "FIRSTNAME": "First Name",
@@ -74,5 +79,48 @@
     "WATCH_HISTORY": "Watch History",
     "SAVE_CHANGES": "Save changes",
     "CANCEL": "Cancel"
+  },
+  "MOVIE": {
+    "ABOUT": "About this movie",
+    "RELEASE": "Release",
+    "DURATION": "Duration",
+    "GENRES": "Genres"
+  },
+  "MY_LIST": {
+    "SUBTITLE": "Movies and shows you've saved",
+    "LOADING": "Loading",
+    "LIKED": "Liked",
+    "WATCH_LATER": "Watch Later"
+  },
+  "NOT_FOUND": {
+    "SUBTITLE": "Lost your way?",
+    "DESCRIPTION": "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+    "HOME": "Netflix Home",
+    "ERROR": "Error"
+  },
+  "SEARCH": {
+    "SUBTITLE": "Trending Movies",
+    "RESULT": "Search Results",
+    "SEARCH": "Search movies, TV shows..."
+  },
+  "SIGN_UP": {
+    "STEP": "STEP 1 OF 2",
+    "SUBTITLE": "Create a firstname and lastname to start your membership",
+    "DESCRIPTION": "Just a few more steps and you're done! We hate paperwork, too.",
+    "NEXT": "Next",
+    "FIRSTNAME": "Firstname",
+    "LASTNAME": "Lastname",
+    "STEP2": "STEP 2 OF 2",
+    "SUBTITLE2": "Create a password to start your membership.",
+    "CREATE": "Create",
+    "PASSWORD": "Add a password"
+  },
+  "WATCH_HISTORY": {
+    "TITLE": "Watch History",
+    "MOVIES": "movies",
+    "COMPLETED": "Completed",
+    "LAST": "Last watched",
+    "NO_WATCH": "No watch history yet",
+    "NO_WATCH_TITLE": "Movies you watch will appear here. "
   }
 }

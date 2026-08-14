@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up-name',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './sign-up-name.html',
   styleUrl: './sign-up-name.css',
 })
@@ -15,7 +16,7 @@ export class SignUpName {
   email=""
   router = inject(Router)
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private translate: TranslateService) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

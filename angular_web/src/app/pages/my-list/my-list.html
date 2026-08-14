@@ -3,27 +3,32 @@
     <div class="logo">NETFLIX</div>
 
     <nav class="nav-links">
-      <a routerLink="/home">Home</a>
-      <a routerLink="/tv-shows">TV Shows</a>
-      <a routerLink="/movies">Movies</a>
-      <a routerLink="/my-list" class="active">My List</a>
+      <a routerLink="/home">{{ 'NAV_MENU.HOME' | translate }}</a>
+      <a routerLink="/tv-shows">{{ 'NAV_MENU.TV_SHOWS' | translate }}</a>
+      <a routerLink="/movies">{{ 'NAV_MENU.MOVIES' | translate }}</a>
+      <a routerLink="/my-list" class="active">{{ 'NAV_MENU.MY_List' | translate }}</a>
     </nav>
 
     <div class="nav-right">
-      <span class="profile-name">My Profile</span>
+      <button class="icon-btn">
+        <span class="material-icons" (click)="search()">search</span>
+      </button>
+      <div class="profile-menu">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profil" (click)="profile()">
+      </div>
     </div>
   </header>
 
   <main class="content">
-    <h1>My List</h1>
+    <h1>{{ 'NAV_MENU.MY_List' | translate }}</h1>
 
-    <p class="subtitle">Movies and shows you've saved</p>
-    <div class="loading" *ngIf="isLoading">Loading...</div>
+    <p class="subtitle">{{ 'MY_LIST.SUBTITLE' | translate }}</p>
+    <div class="loading" *ngIf="isLoading">{{ 'MY_LIST.LOADING' | translate }}...</div>
 
     <!-- LIKED -->
     <section class="content-section" *ngIf="!isLoading">
       <div class="section-header">
-        <h2> Liked</h2>
+        <h2>{{ 'MY_LIST.LIKED' | translate }}</h2>
         <span>{{ likedMovies.length }}</span>
       </div>
 
@@ -49,15 +54,13 @@
       </div>
     </section>
 
-
     <!-- WATCH LATER -->
     <section class="content-section" *ngIf="!isLoading">
 
       <div class="section-header">
-        <h2>Watch Later</h2>
+        <h2>{{ 'MY_LIST.WATCH_LATER' | translate }}</h2>
         <span>{{ watchLaterMovies.length }}</span>
       </div>
-
 
       <!-- WATCH LATER MOVIES -->
       <div class="movie-row" *ngIf="watchLaterMovies.length > 0">

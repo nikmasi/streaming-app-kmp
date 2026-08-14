@@ -3,10 +3,11 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '../../service/auth';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up-password',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './sign-up-password.html',
   styleUrl: './sign-up-password.css',
 })
@@ -18,7 +19,7 @@ export class SignUpPassword {
   firstname='';
   lastname='';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,  private translate: TranslateService) {}
 
   authService = inject(Auth);
 

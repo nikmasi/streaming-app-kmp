@@ -5,15 +5,20 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Catalog } from '../../service/catalog';
 import { environment } from '../home/home';
 import { Movie } from '../../model/movie';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './search.html',
   styleUrl: './search.css',
 })
 export class Search implements OnInit {
+  constructor(
+    private translate: TranslateService
+  ) {}
+
   isScrolled = false;
 
   @HostListener('window:scroll', [])
@@ -82,6 +87,14 @@ export class Search implements OnInit {
 
   getThumbnailUrl(movie: Movie): string {
     return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
+  }
+
+  search(){
+    this.router.navigate(['/search'])
+  }
+
+  profile(){
+    this.router.navigate(['/profile'])
   }
 
 }

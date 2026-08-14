@@ -15,7 +15,11 @@ export class SignUp {
     private translate: TranslateService
   ) {}
 
+
+  currentLanguage = 'sr';
+
   changeLanguage(language: string) {
+    this.currentLanguage = language;
     this.translate.use(language);
   }
 

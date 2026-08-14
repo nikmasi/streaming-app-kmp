@@ -61,7 +61,12 @@
     "HOME": "Početna",
     "TV_SHOWS": "Serije",
     "MOVIES": "Filmovi",
-    "MY_List": "Moja Lista"
+    "MY_List": "Moja Lista",
+    "SEARCH": "Pretraži",
+    "PLAY": "Pusti",
+    "MORE_INFO": "Više informacija",
+    "CONTINUE_WATCHING": "Nastavi sa gledanjem",
+    "PROFILE": "Moj profil"
   },
   "PROFILE": {
     "FIRSTNAME": "Ime",
@@ -74,5 +79,48 @@
     "WATCH_HISTORY": "Istorija gledanja",
     "SAVE_CHANGES": "Sačuvaj promene",
     "CANCEL": "Otkaži"
+  },
+  "MOVIE": {
+    "ABOUT": "O ovom filmu",
+    "RELEASE": "Godina",
+    "DURATION": "Trajanje",
+    "GENRES": "Žanrovi"
+  },
+  "MY_LIST": {
+    "SUBTITLE": "Filmovi i serije koje si sačuvao",
+    "LOADING": "Učitavanje",
+    "LIKED": "Lajkovano",
+    "WATCH_LATER": "Gledaj kasnije"
+  },
+  "NOT_FOUND": {
+    "SUBTITLE": "Izgubili ste se?",
+    "DESCRIPTION": "Žao nam je, ne možemo da pronađemo tu stranicu. Na početnoj stranici pronaći ćete mnogo toga za istraživanje.",
+    "HOME": "Netflix Početna",
+    "ERROR": "Greška"
+  },
+  "SEARCH": {
+    "SUBTITLE": "Popularni filmovi",
+    "RESULT": "Rezultati pretrage",
+    "SEARCH": "Pretraži filmove, serije..."
+  },
+  "SIGN_UP": {
+    "STEP": "KORAK 1 OD 2",
+    "SUBTITLE": "Unesite ime i prezime da biste započeli članstvo.",
+    "DESCRIPTION": "Još samo nekoliko koraka i gotovi ste! Ni mi ne volimo papirologiju.",
+    "NEXT": "Sledeće",
+    "FIRSTNAME": "Ime",
+    "LASTNAME": "Prezime",
+    "STEP2": "KORAK 2 OD 2",
+    "SUBTITLE2": "Unesite lozinku da biste započeli članstvo.",
+    "CREATE": "Kreiraj",
+    "PASSWORD": "Dodaj lozinku"
+  },
+  "WATCH_HISTORY": {
+    "TITLE": "Istorija gledanja",
+    "MOVIES": "filmova",
+    "COMPLETED": "Zavšeno",
+    "LAST": "Poslednje gledano",
+    "NO_WATCH": "Još nema istorije gledanja",
+    "NO_WATCH_TITLE": "Filmovi koje gledate pojaviće se ovde."
   }
 }

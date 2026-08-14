@@ -4,14 +4,16 @@
     <div class="nav-left">
       <div class="logo">NETFLIX</div>
       <nav class="nav-links">
-        <a href="#" class="active">Home</a>
-        <a href="#">TV Shows</a>
-        <a href="#">Movies</a>
-        <a href="my-list">My List</a>
+        <a routerLink="/home" routerLinkActive="active">{{ 'NAV_MENU.HOME' | translate }}</a>
+        <a href="#">{{ 'NAV_MENU.TV_SHOWS' | translate }}</a>
+        <a href="#">{{ 'NAV_MENU.MOVIES' | translate }}</a>
+        <a href="my-list">{{ 'NAV_MENU.MY_List' | translate }}</a>
       </nav>
     </div>
     <div class="nav-right">
-      <button class="icon-btn"><span class="material-icons" (click)="search()">search</span></button>
+      <button class="icon-btn">
+        <span class="material-icons" (click)="search()">search</span>
+      </button>
       <div class="profile-menu">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profil" (click)="profile()">
       </div>
@@ -28,10 +30,10 @@
       </p>
       <div class="hero-buttons">
         <button class="btn btn-play">
-          <span class="material-icons">play_arrow</span> Play
+          <span class="material-icons">play_arrow</span> {{ 'NAV_MENU.PLAY' | translate }}
         </button>
         <button class="btn btn-info">
-          <span class="material-icons">info</span> More informations
+          <span class="material-icons">info</span> {{ 'NAV_MENU.MORE_INFO' | translate }}
         </button>
       </div>
     </div>
@@ -41,7 +43,7 @@
   <main class="content-rows">
 
   <section class="row-section">
-    <h2>Continue watching</h2>
+    <h2>{{ 'NAV_MENU.CONTINUE_WATCHING' | translate }}</h2>
     <div class="row-slider">
       <div class="card" *ngFor="let watch of history" (click)="continueWatching(watch)">
           <img [src]="getThumbnailUrlForWatch(watch.movie)" [alt]="watch.movie.title">
@@ -58,16 +60,13 @@
     <h2>Top {{ genre }}</h2>
 
     <div class="row-slider">
-
       <div class="card" *ngFor="let movie of data[genre]" (click)="openMovie(movie)">
-
           <img [src]="getThumbnailUrl(movie)" [alt]="movie.title">
 
           <div class="card-content">
               <h3>{{ movie.title }}</h3>
               <p>{{ movie.releaseYear }}</p>
           </div>
-
       </div>
     </div>
   </section>

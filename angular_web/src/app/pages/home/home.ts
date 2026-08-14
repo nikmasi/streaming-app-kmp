@@ -4,6 +4,7 @@ import { Catalog } from '../../service/catalog';
 import { Router } from '@angular/router';
 import { Movie } from '../../model/movie';
 import { MovieResponse, Playback, WatchProgress } from '../../service/playback';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 export const environment = {
   apiUrl: 'http://localhost:8222'
@@ -12,11 +13,15 @@ export const environment = {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule], 
+  imports: [CommonModule, TranslatePipe], 
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 export class HomeComponent implements OnInit {
+  constructor(
+    private translate: TranslateService
+  ) {}
+  
   isScrolled = false;
 
   catalogService = inject(Catalog);

@@ -6,10 +6,11 @@ import { environment } from '../home/home';
 import { MovieResponse, WatchProgress } from '../../service/playback';
 import { Favourite } from '../../service/favourite';
 import { ContentType } from '../../model/favourite';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie-details',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './movie-details.html',
   styleUrl: './movie-details.css',
 })
@@ -24,7 +25,7 @@ export class MovieDetails implements OnInit{
 
   email = ""
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     this.watchProgress = history.state.watch;
 
     this.movie = history.state.movie ?? this.watchProgress?.movie;

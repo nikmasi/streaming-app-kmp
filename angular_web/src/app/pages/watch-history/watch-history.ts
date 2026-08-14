@@ -2,15 +2,19 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MovieResponse, Playback, WatchProgress } from '../../service/playback';
 import { environment } from '../home/home';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-watch-history',
-  imports: [DatePipe, CommonModule],
+  imports: [DatePipe, CommonModule, TranslatePipe],
   templateUrl: './watch-history.html',
   styleUrl: './watch-history.css',
 })
 export class WatchHistory implements OnInit {
-  
+  constructor(
+    private translate: TranslateService
+  ) {}
+
   private playbackService = inject(Playback);
 
   history: WatchProgress[] = [];

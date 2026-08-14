@@ -5,8 +5,14 @@
       <h1 class="logo">NETFLIX</h1>
 
       <button class="sign-in" (click)="sign_in()">{{ 'HEADER.SIGN_IN' | translate }}</button>
-      <button class="sign-in" (click)="changeLanguage('sr')"> SR </button>
-      <button class="sign-in" (click)="changeLanguage('en')"> EN </button>
+       <select
+          class="language-select"
+          [value]="currentLanguage"
+          (change)="changeLanguage($any($event.target).value)"
+        >
+          <option value="sr">SR</option>
+          <option value="en">EN</option>
+        </select>
     </header>
 
     <div class="overlay"></div>

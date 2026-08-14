@@ -6,14 +6,21 @@ import { Movie } from '../../model/movie';
 import { MovieResponse } from '../../service/playback';
 import { UserContentPreference } from '../../model/favourite';
 import { environment } from '../home/home';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-list',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './my-list.html',
   styleUrl: './my-list.css',
 })
 export class MyList implements OnInit {
+  router = inject(Router)
+
+  constructor(
+    private translate: TranslateService
+  ) {}
 
   private favouriteService = inject(Favourite);
   private catalogService = inject(Catalog);
@@ -119,5 +126,13 @@ export class MyList implements OnInit {
 
   getThumbnailUrlForWatch(movie: MovieResponse): string {
     return `${environment.apiUrl}/api/v1/catalog/${movie.thumbnailUrl}`;
+  }
+
+  profile(){
+    this.router.navigate(['/profile'])
+  }
+
+  search(){
+    this.router.navigate(['/search'])
   }
 }

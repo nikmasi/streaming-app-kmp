@@ -325,3 +325,29 @@
         padding-right: 25px;
     }
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-select {
+  background: #000;
+  color: white;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: white;
+}
+
+.language-select option {
+  background: #000;
+  color: white;
+}
