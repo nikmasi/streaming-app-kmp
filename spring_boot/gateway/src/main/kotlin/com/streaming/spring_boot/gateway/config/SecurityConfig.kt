@@ -9,29 +9,15 @@ import org.springframework.security.web.server.SecurityWebFilterChain
 @Configuration
 class SecurityConfig {
 
-//    @Bean
-//    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
-//        return http
-//            .csrf { it.disable() }
-//            .cors { }
-//            .authorizeExchange {
-//                it.pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                it.pathMatchers("/api/v1/auth/**").permitAll()
-//                it.pathMatchers("/api/v1/catalog/**").permitAll()
-//                it.anyExchange().authenticated()
-//            }
-//            .build()
-//    }
-
     @Bean
     fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http
             .csrf { it.disable() }
             .cors { }
             .authorizeExchange {
+
                 it.anyExchange().permitAll()
             }
             .build()
     }
-
 }

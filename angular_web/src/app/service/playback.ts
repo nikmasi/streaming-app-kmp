@@ -35,8 +35,7 @@ export class Playback {
 
   private http = inject(HttpClient);
 
-  private readonly apiUrl =
-    'http://localhost:8222/api/v1/playback';
+  private readonly apiUrl = 'http://localhost:8222/api/v1/playback';
 
   // privremeno
   private readonly userEmail = 'gica@test.com';
@@ -94,4 +93,12 @@ export class Playback {
       }
     );
   }
+
+
+  // get url za gledanje filma
+  getVideoUrl(movieId: string): string {
+    // vraca punu putanju
+    return `${this.apiUrl}/video?movieId=${movieId}`;
+  }
+
 }

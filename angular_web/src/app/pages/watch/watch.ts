@@ -60,7 +60,7 @@ export class Watch implements AfterViewInit, OnDestroy {
   }
 
   private initPlayer() {
-    const url ='http://localhost:8080' + this.movie.videoUrl;
+    const url ='http://localhost:8222' + this.movie.videoUrl;
 
     const video = this.video.nativeElement;
 
@@ -74,9 +74,49 @@ export class Watch implements AfterViewInit, OnDestroy {
     video.addEventListener('ended', () => { this.saveProgress();});
 
     if (Hls.isSupported()) {
-      this.hls = new Hls();
+      const token = localStorage.getItem('access_token');
+
+      this.hls = new Hls({
+        xhrSetup: function (xhr, url) {
+          if (token) {
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+          }
+        }
+      });
       this.hls.loadSource(url);
       this.hls.attachMedia(video);
+
+      // za greske u strimovanju
+      this.hls.on(Hls.Events.ERROR, (event, data) => {
+        if (data.fatal) {
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              console.warn('Network error encountered (Node might be down), trying to recover via Gateway...', data);
+              
+              // ako je fatalna mrezna greska (cvor je pao), pokusavamo ponovno ucitavanje sorsa
+              // kako bi gateway preusmerili zahtev na drugi preziveli playback cvor 
+              setTimeout(() => {
+                if (this.hls) {
+                  const currentPosition = video.currentTime; // zapamtimo trenutnu sekundu
+                  this.hls.startLoad();
+                  // ako ni to ne pomogne, resetujemo izvor na isti url da ponovo prodje kroz gateway
+                  this.hls.loadSource(url);
+                  video.currentTime = currentPosition; // na isto mesto se vracamo
+                }
+              }, 1500);
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              console.warn('Media error encountered, trying to recover...', data);
+              this.hls?.recoverMediaError();
+              break;
+            default:
+              // fatalna greska - cvor je skroz pao ili 404  ili 503
+              console.error('Fatal HLS error, destroying player...', data);
+              this.hls?.destroy();
+              break;
+          }
+        }
+      });
     } else if (
       video.canPlayType(
         'application/vnd.apple.mpegurl'
@@ -84,6 +124,8 @@ export class Watch implements AfterViewInit, OnDestroy {
     ) {
       video.src = url;
     }
+
+
 
     // cuvaj progress svakih 5 sekundi
     this.saveInterval = setInterval(() => {

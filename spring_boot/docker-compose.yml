@@ -5,6 +5,8 @@ services:
     image: openzipkin/zipkin
     ports:
       - "9411:9411"
+    networks:
+      - streaming-network
 
   postgres:
     image: postgres:16
@@ -148,7 +150,7 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - ./playback/storage-1:/app/storage
+      - ./playback/storage:/app/storage
     networks:
       - streaming-network
     depends_on:
@@ -175,7 +177,7 @@ services:
     ports:
       - "8082:8080"
     volumes:
-      - ./playback/storage-2:/app/storage
+      - ./playback/storage:/app/storage
     networks:
       - streaming-network
     depends_on:
@@ -201,7 +203,7 @@ services:
     ports:
       - "8083:8080"
     volumes:
-      - ./playback/storage-3:/app/storage
+      - ./playback/storage:/app/storage
     networks:
       - streaming-network
     depends_on:
